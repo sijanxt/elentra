@@ -1,17 +1,16 @@
 import Hero from "@/components/home/hero";
 import Features from "@/components/home/features";
-import Testimonials from "@/components/home/testimonials";
-
+import Category from "@/components/home/category";
 import CTA from "@/components/home/cta";
+import Products from "@/components/home/product";
 
 export default function Home() {
   return (
     <main>
       <Hero />
       <Features />
-      <Testimonials />
-    
-   
+      <Category />
+      <Products />
       <CTA />
     </main>
   );

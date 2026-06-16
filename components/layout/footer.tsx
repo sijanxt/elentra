@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -8,15 +11,26 @@ export default function Footer() {
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand Section */}
-          <div className="md:col-span-1">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="md:col-span-1"
+          >
             <h2 className="text-3xl font-bold mb-4">Elentra</h2>
             <p className="text-secondary/80 text-sm leading-relaxed">
               Transform your home with cutting-edge appliances designed for modern living.
             </p>
-          </div>
+          </motion.div>
 
           {/* Navigation */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <h3 className="text-lg font-semibold mb-4">Navigation</h3>
             <ul className="space-y-3">
               <li>
@@ -40,10 +54,15 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <h3 className="text-lg font-semibold mb-4">Quick Link</h3>
             <ul className="space-y-3">
               <li>
@@ -67,10 +86,15 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Services */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-3">
               <li>
@@ -94,11 +118,17 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-          </div>
+          </motion.div>
         </div>
 
         {/* Contact Info Bar */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8 border-t border-secondary/20">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 py-8 border-t border-secondary/20"
+        >
           <div className="flex items-center gap-3">
             <MapPin className="w-5 h-5 text-secondary/60" />
             <span className="text-secondary/80 text-sm">123 Home Street, City, State 12345</span>
@@ -111,14 +141,20 @@ export default function Footer() {
             <Mail className="w-5 h-5 text-secondary/60" />
             <span className="text-secondary/80 text-sm">support@elentra.com</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Bottom Section */}
-        <div className="text-center pt-8 border-t border-secondary/20">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-center pt-8 border-t border-secondary/20"
+        >
           <p className="text-secondary/60 text-sm">
             © 2024 Elentra - All Rights Reserved
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );

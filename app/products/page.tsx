@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import PageHero from "@/components/ui/page-hero";
 
 interface Product {
   id: string;
@@ -17,6 +19,11 @@ interface Product {
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
+
+  const handleImageError = (imageSrc: string) => {
+    setImageErrors((prev) => ({ ...prev, [imageSrc]: true }));
+  };
 
   const categories = [
     "All",
@@ -37,7 +44,7 @@ export default function ProductsPage() {
       specs: ["Flush mount", "Integrated downdraft extractor", "Vapor Control"],
       description: "Combining rapid induction heating with integrated steam extraction in a sleek, edge-free ceramic design.",
       status: "In Stock",
-      image: "/products/cooktop.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "2",
@@ -47,7 +54,7 @@ export default function ProductsPage() {
       specs: ["Double convection", "Self-cleaning carbon grid", "AI camera sensor"],
       description: "Features dual-zone temperature matching and built-in camera monitoring for perfect browning results.",
       status: "Limited Edition",
-      image: "/products/oven.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "3",
@@ -57,7 +64,7 @@ export default function ProductsPage() {
       specs: ["Triple-zone evaporator", "Flat stainless profile", "Humidity matrix"],
       description: "Keeps delicate greens fresh twice as long with split zone humidity control and discrete filtered water tap.",
       status: "In Stock",
-      image: "/products/fridge.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "4",
@@ -67,7 +74,7 @@ export default function ProductsPage() {
       specs: ["Anti-vibration base", "UV filtered glass", "Dual humidity zones"],
       description: "Stores up to 72 bottles under custom light scenarios and sound-dampened conditions.",
       status: "Pre-order",
-      image: "/products/wine.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "5",
@@ -77,7 +84,7 @@ export default function ProductsPage() {
       specs: ["18dB Sound Level", "HEPA H14 filtration", "Coanda air deflection"],
       description: "Engineered to deliver filtered fresh air in virtual silence, automatically sensing ambient particulate load.",
       status: "In Stock",
-      image: "/products/ac.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "6",
@@ -87,7 +94,7 @@ export default function ProductsPage() {
       specs: ["Radar occupancy sensing", "AI thermal predictive learning", "Minimalist glass dial"],
       description: "Adjusts rooms dynamically when occupied and learns thermal efficiency curves of the home.",
       status: "In Stock",
-      image: "/products/thermostat.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "7",
@@ -97,7 +104,7 @@ export default function ProductsPage() {
       specs: ["Direct-drive brushless motor", "Sub-drum suspension", "Auto-dose dispenser"],
       description: "Minimizes fabric stress and micro-tear profiles via variable tumbling dynamics and water injection.",
       status: "In Stock",
-      image: "/products/washer.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "8",
@@ -107,7 +114,7 @@ export default function ProductsPage() {
       specs: ["Closed-loop heating", "Real-time moisture matrix", "Lint flush"],
       description: "Uses a highly efficient closed-loop compressor to dry garments at lower, gentler temperatures.",
       status: "In Stock",
-      image: "/products/dryer.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "9",
@@ -117,7 +124,7 @@ export default function ProductsPage() {
       specs: ["6000Pa vacuum suction", "Rotary hot mop scrubbing", "Auto empty/wash"],
       description: "Fully automated dry and wet sweep robot using dual-channel LiDAR radar and reactive camera avoidances.",
       status: "In Stock",
-      image: "/products/robot.jpg"
+      image: "/products/vaccumclenaer.png"
     },
     {
       id: "10",
@@ -127,7 +134,7 @@ export default function ProductsPage() {
       specs: ["150AW brush motor", "Laser particle indicator", "Carbon wand"],
       description: "Ultra-light handheld vacuum detailing hidden dust arrays via integrated narrow-angle green laser.",
       status: "In Stock",
-      image: "/products/vacuum.jpg"
+      image: "/products/vaccumclenaer.png"
     },
     {
       id: "11",
@@ -137,7 +144,7 @@ export default function ProductsPage() {
       specs: ["10\" flush glass console", "Zigbee / Matter / Thread", "Vocal array"],
       description: "Your home dashboard showing real-time utility parameters, filter stats, and active cycles across all appliances.",
       status: "In Stock",
-      image: "/products/hub.jpg"
+      image: "/products/fridge.png"
     },
     {
       id: "12",
@@ -147,7 +154,7 @@ export default function ProductsPage() {
       specs: ["Particulate load tracker", "VOC chemical analyzer", "Direct HVAC bypass"],
       description: "Continuous evaluation of ambient air matrices, triggering ventilation fans to clear kitchen fumes dynamically.",
       status: "In Stock",
-      image: "/products/purifier.jpg"
+      image: "/products/fridge.png"
     }
   ];
 
@@ -159,18 +166,14 @@ export default function ProductsPage() {
   });
 
   return (
-    <div className="min-h-screen bg-white pt-24 pb-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl sm:text-6xl font-bold text-secondary mb-4">
-            Our Products
-          </h1>
-          <p className="text-lg text-zinc-500 max-w-2xl mx-auto">
-            Discover our complete collection of premium home appliances designed for modern living.
-          </p>
-        </div>
-
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <PageHero
+        title="Our Products"
+        description="Discover our complete collection of premium home appliances designed for modern living."
+      />
+      
+      <div className="max-w-7xl mx-auto py-16">
         {/* Search & Filter */}
         <div className="mb-16">
           {/* Search Bar */}
@@ -180,20 +183,20 @@ export default function ProductsPage() {
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-6 py-3 bg-white border border-zinc-200 rounded-lg focus:outline-none focus:border-zinc-400 transition-all text-secondary"
+              className="w-full py-3 bg-white border-b border-zinc-200 focus:outline-none focus:border-zinc-400 transition-all text-secondary"
             />
           </div>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-6 py-2.5 text-sm font-medium rounded-full transition-all duration-300 ${
                   selectedCategory === category
-                    ? "bg-secondary text-white"
-                    : "bg-white text-zinc-600 border border-zinc-200 hover:border-zinc-400"
+                    ? "bg-cream-600 text-white shadow-md"
+                    : "bg-white border border-zinc-200 text-zinc-600 hover:border-cream-600 hover:text-cream-600"
                 }`}
               >
                 {category}
@@ -210,63 +213,33 @@ export default function ProductsPage() {
               href={`/products/${product.id}`}
               className="group"
             >
-              <div className="bg-white border border-zinc-200 rounded-lg overflow-hidden hover:border-zinc-400 transition-all duration-300">
+              <div className="bg-white transition-all duration-300">
                 {/* Product Image */}
-                <div className="h-64 bg-zinc-50 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-zinc-200 flex items-center justify-center">
-                      <svg className="w-10 h-10 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
-                      </svg>
+                <div className="aspect-[4/5] bg-zinc-100 relative overflow-hidden mb-4">
+                  {(!imageErrors[product.image] && product.image) ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-contain"
+                      onError={() => handleImageError(product.image)}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-32 h-32 bg-zinc-200 flex items-center justify-center">
+                        <svg className="w-16 h-16 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-                  
-                  {/* Status Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className={`text-xs font-medium uppercase tracking-wider py-1 px-3 rounded-full ${
-                      product.status === "In Stock"
-                        ? "bg-emerald-500 text-white"
-                        : product.status === "Limited Edition"
-                        ? "bg-amber-500 text-white"
-                        : "bg-blue-500 text-white"
-                    }`}>
-                      {product.status}
-                    </span>
-                  </div>
+                  )}
                 </div>
 
                 {/* Product Info */}
-                <div className="p-6">
-                  <div className="mb-2">
-                    <span className="text-xs font-medium text-zinc-500 uppercase tracking-wide">
-                      {product.category}
-                    </span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-secondary mb-2 group-hover:text-zinc-600 transition-colors">
+                <div className="text-center">
+                  <h3 className="text-lg font-medium text-secondary group-hover:text-zinc-600 transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-zinc-500 mb-4 line-clamp-2">
-                    {product.description}
-                  </p>
-
-                  {/* Specs */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {product.specs.slice(0, 2).map((spec, index) => (
-                      <span
-                        key={index}
-                        className="text-xs bg-zinc-50 text-zinc-600 px-3 py-1 rounded-full border border-zinc-200"
-                      >
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Price */}
-                  <div className="pt-4 border-t border-zinc-200">
-                    <span className="text-2xl font-bold text-secondary">
-                      {product.price}
-                    </span>
-                  </div>
                 </div>
               </div>
             </Link>
@@ -279,25 +252,6 @@ export default function ProductsPage() {
             <p className="text-xl text-zinc-400">No products found matching your criteria.</p>
           </div>
         )}
-
-        {/* CTA Section */}
-        <div className="mt-20 text-center border border-zinc-200 rounded-lg p-12">
-          <h2 className="text-3xl font-bold text-secondary mb-4">
-            Need Help Choosing?
-          </h2>
-          <p className="text-zinc-500 mb-8 max-w-2xl mx-auto">
-            Our experts are here to help you find the perfect appliances for your home.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center gap-2 bg-secondary text-white font-semibold px-8 py-3 rounded-lg hover:bg-zinc-800 transition-all"
-          >
-            Contact Our Experts
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
       </div>
     </div>
   );

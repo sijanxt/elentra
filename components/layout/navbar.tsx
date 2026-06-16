@@ -2,29 +2,54 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          
+          // Check if scrolled past 50px
+          setIsScrolled(currentScrollY > 50);
+
+          // Check scroll direction
+          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling down & past 100px
+            setIsVisible(false);
+          } else {
+            // Scrolling up
+            setIsVisible(true);
+          }
+
+          setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+        
+        ticking = true;
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${
       isScrolled 
         ? "bg-white/95 backdrop-blur-md shadow-sm" 
         : "bg-transparent"
+    } ${
+      isVisible ? "translate-y-0" : "-translate-y-full"
     }`}>
       <div className="max-w-7xl mx-auto ">
         <div className="flex justify-between items-center h-16">
@@ -41,10 +66,9 @@ export default function Navbar() {
           <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-8">
             {[
               { name: "Home", href: "/" },
+              { name: "About", href: "/about" },
               { name: "Shop", href: "/products" },
-              { name: "Categories", href: "/products" },
-              { name: "Smart Home", href: "/products" },
-              { name: "Deals", href: "/products" },
+              { name: "Smart Home", href: "/smart-home" },
               { name: "Support", href: "/contact" },
             ].map((link) => (
               <Link
@@ -112,7 +136,7 @@ export default function Navbar() {
               { name: "Home", href: "/" },
               { name: "Shop", href: "/products" },
               { name: "Categories", href: "/products" },
-              { name: "Smart Home", href: "/products" },
+              { name: "Smart Home", href: "/smart-home" },
               { name: "Deals", href: "/products" },
               { name: "Support", href: "/contact" },
             ].map((link) => (

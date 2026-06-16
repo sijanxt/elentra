@@ -6,7 +6,7 @@ import Lenis from "lenis";
 export default function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       gestureOrientation: "vertical",
@@ -15,6 +15,8 @@ export default function LenisProvider({ children }: { children: ReactNode }) {
       smoothTouch: false,
       touchMultiplier: 2,
       infinite: false,
+      syncTouch: true,
+      touchInertiaMultiplier: 35,
     });
 
     function raf(time: number) {

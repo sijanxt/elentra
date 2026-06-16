@@ -60,14 +60,14 @@ export default function Hero() {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="absolute bottom-16 right-8 lg:right-16"
+          className="absolute bottom-16 right-16 lg:right-32"
         >
-          <div className="flex flex-col gap-3 text-zinc-300 items-end">
+          <div className="flex flex-col gap-3 text-[#C5D9D9] items-end">
             <a 
               href="https://behance.net" 
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-cream-400 transition-colors flex items-center gap-2"
+              className="hover:text-white transition-colors flex items-center gap-2"
             >
               <span className="text-sm font-medium">Behance</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -78,7 +78,7 @@ export default function Hero() {
               href="https://instagram.com" 
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-cream-400 transition-colors flex items-center gap-2"
+              className="hover:text-white transition-colors flex items-center gap-2"
             >
               <span className="text-sm font-medium">Instagram</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -89,7 +89,7 @@ export default function Hero() {
               href="https://linkedin.com" 
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-cream-400 transition-colors flex items-center gap-2"
+              className="hover:text-white transition-colors flex items-center gap-2"
             >
               <span className="text-sm font-medium">LinkedIn</span>
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

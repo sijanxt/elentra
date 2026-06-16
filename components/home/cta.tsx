@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function CTA() {
   return (
@@ -15,16 +18,34 @@ export default function CTA() {
       </div>
       
       <div className="max-w-5xl mx-auto text-center relative z-10">
-        <h2 className="text-4xl sm:text-5xl md:text-5xl font-bold text-white tracking-tight mb-6">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl sm:text-5xl md:text-5xl font-bold text-white tracking-tight mb-6"
+        >
           Ready to Upgrade Your <br className="hidden sm:block" />
           <span className="text-cream-400">Living Space?</span>
-        </h2>
+        </motion.h2>
         
-        <p className="text-base sm:text-lg text-zinc-900 leading-relaxed mb-10 max-w-2xl mx-auto">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-base sm:text-lg text-zinc-900 leading-relaxed mb-10 max-w-2xl mx-auto"
+        >
           Experience the perfect blend of innovation, efficiency, and design with Elentra's premium home appliances.
-        </p>
+        </motion.p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+        >
           <Link
             href="/contact"
             className="w-full sm:w-auto px-6 py-2.5 text-base rounded-full font-semibold transition-all duration-300 border-2 border-white text-white hover:bg-white hover:text-black"
@@ -38,7 +59,7 @@ export default function CTA() {
           >
             Browse Products
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
