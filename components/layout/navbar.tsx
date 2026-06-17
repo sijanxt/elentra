@@ -24,8 +24,14 @@ export default function Navbar() {
           // Check if scrolled past 50px
           setIsScrolled(currentScrollY > 50);
 
-          // Check scroll direction
-          if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          // Check if scrolled into the footer area (approx 800px from the bottom, only if page is tall enough)
+          const scrollHeight = document.documentElement.scrollHeight;
+          const clientHeight = document.documentElement.clientHeight;
+          const isAtFooter = scrollHeight - clientHeight > 800 && currentScrollY + clientHeight >= scrollHeight - 800;
+
+          if (isAtFooter) {
+            setIsVisible(false);
+          } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
             // Scrolling down & past 100px
             setIsVisible(false);
           } else {
