@@ -9,6 +9,7 @@ interface PageHeroProps {
   bgColor?: string;
   bgImage?: string;
   bgOpacity?: number;
+  sideImage?: string; // Image to show on the right side
 }
 
 export default function PageHero({ 
@@ -16,10 +17,11 @@ export default function PageHero({
   description, 
   bgColor = "bg-champagne",
   bgImage,
-  bgOpacity = 0.3
+  bgOpacity = 0.3,
+  sideImage
 }: PageHeroProps) {
   return (
-    <div className={`relative ${bgColor} pt-32 pb-20 px-4 overflow-hidden`}>
+    <div className={`relative ${bgColor} pt-32 pb-20 px-6 sm:px-8 overflow-hidden`}>
       {/* Background Image */}
       {bgImage && (
         <div className="absolute inset-0">
@@ -33,23 +35,65 @@ export default function PageHero({
         </div>
       )}
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl md:text-4xl font-bold text-gray-900 mb-6"
-        >
-          {title}
-        </motion.h1>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed"
-        >
-          {description}
-        </motion.p>
+      <div className="max-w-7xl mx-auto relative z-10">
+        {sideImage ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left Column: Text */}
+            <div className="text-left max-w-xl">
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-4xl md:text-5xl font-cormorant font-light text-zinc-900 leading-tight mb-6"
+              >
+                {title}
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-zinc-600 text-base md:text-lg leading-relaxed font-light"
+              >
+                {description}
+              </motion.p>
+            </div>
+            
+            {/* Right Column: Image */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative h-[300px] md:h-[400px] w-full rounded-2xl overflow-hidden shadow-lg border border-white/40"
+            >
+              <Image
+                src={sideImage}
+                alt="Contact Hero image"
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                priority
+              />
+            </motion.div>
+          </div>
+        ) : (
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-3xl md:text-4xl font-bold text-gray-900 mb-6"
+            >
+              {title}
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed"
+            >
+              {description}
+            </motion.p>
+          </div>
+        )}
       </div>
     </div>
   );

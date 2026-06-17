@@ -4,7 +4,6 @@ import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import LenisProvider from "@/components/providers/lenis-provider";
 import Preloader from "@/components/ui/preloader";
-import SoundToggle from "@/components/ui/sound-toggle";
 import "./globals.css";
 
 const lora = Lora({
@@ -51,7 +50,6 @@ export default function RootLayout({
           </main>
           <Footer />
         </LenisProvider>
-        <SoundToggle />
       </body>
     </html>
   );

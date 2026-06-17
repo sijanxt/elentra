@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import SoundToggle from "../ui/sound-toggle";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -56,7 +57,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className={`text-3xl transition-colors duration-300 ${
+            <Link href="/" className={`text-3xl font-cormorant font-semibold transition-colors duration-300 ${
               shouldShowOpaque ? "text-secondary" : "text-white"
             }`}>
               Elentra
@@ -70,7 +71,7 @@ export default function Navbar() {
               { name: "About", href: "/about" },
               { name: "Shop", href: "/products" },
               { name: "Smart Home", href: "/smart-home" },
-              { name: "Support", href: "/contact" },
+              { name: "Contact", href: "/contact" },
             ].map((link) => (
               <Link
                 key={link.name}
@@ -86,45 +87,36 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Get Quote Button - Right Side */}
-          <div className="hidden md:flex">
-            <Link
-              href="/contact"
-              className={`px-5 py-1.5 text-sm rounded-full font-semibold transition-all duration-300 border-2 ${
-                shouldShowOpaque
-                  ? "border-secondary text-secondary hover:bg-secondary hover:text-white"
-                  : "border-white text-white hover:bg-white hover:text-secondary"
-              }`}
-            >
-              Get a Quote
-            </Link>
-          </div>
+          {/* Right Section: Sound Toggle & Mobile Menu button */}
+          <div className="flex items-center gap-4">
+            <SoundToggle isOpaque={shouldShowOpaque} />
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`focus:outline-none transition-colors duration-300 ${
-                shouldShowOpaque ? "text-secondary hover:text-cream-600" : "text-white hover:text-white/80"
-              }`}
-              aria-label="Toggle menu"
-            >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className={`focus:outline-none transition-colors duration-300 ${
+                  shouldShowOpaque ? "text-secondary hover:text-cream-600" : "text-white hover:text-white/80"
+                }`}
+                aria-label="Toggle menu"
               >
-                {mobileMenuOpen ? (
-                  <path d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  {mobileMenuOpen ? (
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -139,7 +131,7 @@ export default function Navbar() {
               { name: "Categories", href: "/products" },
               { name: "Smart Home", href: "/smart-home" },
               { name: "Deals", href: "/products" },
-              { name: "Support", href: "/contact" },
+              { name: "Contact", href: "/contact" },
             ].map((link) => (
               <Link
                 key={link.name}
@@ -150,13 +142,6 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <Link
-              href="/contact"
-              className="block mx-3 mt-4 text-center bg-cream-600 hover:bg-cream-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Get a Quote
-            </Link>
           </div>
         </div>
       )}

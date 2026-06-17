@@ -3,7 +3,11 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-export default function SoundToggle() {
+interface SoundToggleProps {
+  isOpaque?: boolean;
+}
+
+export default function SoundToggle({ isOpaque = true }: SoundToggleProps) {
   const [isMuted, setIsMuted] = useState(true);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -49,18 +53,20 @@ export default function SoundToggle() {
     <motion.button
       id="sound-toggle"
       onClick={toggleSound}
-      className="fixed bottom-8 right-8 z-50 flex items-center gap-2.5 group cursor-pointer"
-      initial={{ opacity: 0, y: 20 }}
+      className="relative flex items-center gap-2.5 group cursor-pointer focus:outline-none py-1.5 px-3 rounded-full transition-all duration-300"
+      initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 3.2 }}
+      transition={{ duration: 0.6, delay: 1.5 }}
       aria-label={isMuted ? "Unmute sound" : "Mute sound"}
     >
       {/* Label */}
       <motion.span
-        className="text-[10px] uppercase tracking-[0.2em] font-medium text-zinc-400 group-hover:text-zinc-600 transition-colors duration-300 hidden sm:inline"
+        className={`text-[10px] uppercase tracking-[0.2em] font-medium transition-colors duration-300 hidden sm:inline ${
+          isOpaque ? "text-zinc-500 group-hover:text-zinc-800" : "text-white/80 group-hover:text-white"
+        }`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.5 }}
+        transition={{ delay: 1.8 }}
       >
         {isMuted ? "Sound Off" : "Sound On"}
       </motion.span>
@@ -70,7 +76,9 @@ export default function SoundToggle() {
         {bars.map((bar, i) => (
           <motion.span
             key={i}
-            className="w-[2px] rounded-full bg-zinc-500 group-hover:bg-cream-500 transition-colors duration-300"
+            className={`w-[2px] rounded-full transition-colors duration-300 ${
+              isOpaque ? "bg-zinc-500 group-hover:bg-cream-500" : "bg-white group-hover:bg-cream-300"
+            }`}
             animate={
               isMuted
                 ? { height: bar.height.muted }
@@ -101,8 +109,11 @@ export default function SoundToggle() {
 
       {/* Subtle ring indicator */}
       <motion.div
-        className="absolute inset-[-8px] rounded-full border border-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-        style={{ borderRadius: "999px" }}
+        className={`absolute inset-0 rounded-full border transition-colors duration-300 ${
+          isOpaque 
+            ? "border-zinc-200 group-hover:border-cream-500" 
+            : "border-white/20 group-hover:border-white/55"
+        }`}
       />
     </motion.button>
   );
