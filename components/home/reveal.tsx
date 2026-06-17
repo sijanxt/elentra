@@ -1,92 +1,200 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function RevealSection() {
-  const [scrollProgress, setScrollProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+  const imageWrapperRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  
+  // Second image refs
+  const imageWrapper2Ref = useRef<HTMLDivElement>(null);
+  const image2Ref = useRef<HTMLImageElement>(null);
+
+  // Third image refs
+  const imageWrapper3Ref = useRef<HTMLDivElement>(null);
+  const image3Ref = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
+    if (
+      !containerRef.current ||
+      !textRef.current ||
+      !imageWrapperRef.current ||
+      !imageRef.current ||
+      !imageWrapper2Ref.current ||
+      !image2Ref.current ||
+      !imageWrapper3Ref.current ||
+      !image3Ref.current
+    )
+      return;
 
-      const rect = containerRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const sectionHeight = containerRef.current.offsetHeight;
-      
-      // Calculate progress (0 to 1)
-      // Progress increases as user scrolls through the pinned section
-      if (rect.top <= 0 && rect.bottom >= windowHeight) {
-        const scrolled = Math.abs(rect.top);
-        const totalScroll = sectionHeight - windowHeight;
-        const progress = Math.min(1, scrolled / totalScroll);
-        setScrollProgress(progress);
-      } else if (rect.top > 0) {
-        setScrollProgress(0);
-      } else {
-        setScrollProgress(1);
-      }
-    };
+    const ctx = gsap.context(() => {
+      // Set initial centering and translations to avoid Tailwind/React inline style conflicts
+      gsap.set(imageWrapperRef.current, { xPercent: -50, yPercent: -50 });
+      gsap.set(imageWrapper2Ref.current, { xPercent: 100 });
+      gsap.set(imageWrapper3Ref.current, { xPercent: 100 });
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+      // Complete scroll timeline spanning 320vh for scroll space
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+      });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+      // --- PHASE 1: Text Fades, Background Image 1 Expands (Progress 0 to 0.3) ---
+      tl.to(textRef.current, {
+        opacity: 0,
+        y: -60,
+        duration: 0.3,
+        ease: "power1.out",
+      }, 0);
+
+      tl.to(imageWrapperRef.current, {
+        opacity: 1,
+        width: "100vw",
+        height: "100vh",
+        borderRadius: "0px",
+        duration: 0.3,
+        ease: "power2.inOut",
+      }, 0);
+
+      tl.to(imageRef.current, {
+        scale: 1.12,
+        duration: 0.3,
+        ease: "power2.inOut",
+      }, 0);
+
+      // --- PHASE 2: Image 1 Slides out left, Image 2 Slides in from right (Progress 0.3 to 0.65) ---
+      tl.to(imageWrapperRef.current, {
+        xPercent: -150,
+        duration: 0.35,
+        ease: "power2.inOut",
+      }, 0.3);
+
+      tl.to(imageWrapper2Ref.current, {
+        xPercent: 0, // slides to center
+        duration: 0.35,
+        ease: "power2.inOut",
+      }, 0.3);
+
+      tl.fromTo(image2Ref.current,
+        { scale: 1.2 },
+        {
+          scale: 1.05,
+          duration: 0.35,
+          ease: "power2.inOut",
+        },
+        0.3
+      );
+
+      // --- PHASE 3: Image 2 Slides out left, Image 3 Slides in from right (Progress 0.65 to 1.0) ---
+      tl.to(imageWrapper2Ref.current, {
+        xPercent: -100,
+        duration: 0.35,
+        ease: "power2.inOut",
+      }, 0.65);
+
+      tl.to(imageWrapper3Ref.current, {
+        xPercent: 0, // slides to center
+        duration: 0.35,
+        ease: "power2.inOut",
+      }, 0.65);
+
+      tl.fromTo(image3Ref.current,
+        { scale: 1.2 },
+        {
+          scale: 1.05,
+          duration: 0.35,
+          ease: "power2.inOut",
+        },
+        0.65
+      );
+    });
+
+    return () => ctx.revert();
   }, []);
 
-  // Easing function for smoother transitions
-  const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
-  const smoothstep = (min: number, max: number, value: number) => Math.max(0, Math.min(1, (value - min) / (max - min)));
-
-  // Calculate effects based on scroll progress
-  const blurAmount = scrollProgress * 100; // Starts at 0, increases to 100px blur
-  const imageOpacity = Math.max(0.15, 0.75 - scrollProgress * 0.6); // Starts at 75%, fades to 15%
-  const imageScale = 1 + scrollProgress * 0.3; // Image scales up as you scroll
-
-  // Text reveal logic - faster timing (30% to 80% scroll)
-  const textProgress = smoothstep(0.3, 0.8, scrollProgress);
-  const smoothTextProgress = easeOutQuart(textProgress);
-  const textOpacity = smoothTextProgress;
-
   return (
-    <div ref={containerRef} className="relative" style={{ height: "200vh" }}>
-      {/* Sticky/Pinned Section */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center bg-zinc-50 overflow-hidden">
-        {/* Background Image with Blur Effect */}
+    <div ref={containerRef} className="relative w-full" style={{ height: "320vh" }}>
+      {/* Pinned Viewport */}
+      <div className="sticky top-0 h-screen w-full bg-zinc-50 overflow-hidden">
+        
+        {/* Expanding Image Wrapper 1 */}
         <div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{
-            filter: `blur(${blurAmount}px)`,
-            opacity: imageOpacity,
-            transform: `scale(${imageScale})`,
-            transition: "transform 0.1s ease-out",
-          }}
+          ref={imageWrapperRef}
+          style={{ opacity: 0 }}
+          className="absolute left-1/2 top-1/2 w-[280px] h-[180px] sm:w-[400px] sm:h-[260px] md:w-[500px] md:h-[325px] overflow-hidden rounded-2xl shadow-2xl z-10 flex-shrink-0"
         >
           <Image
-            src="/ourteam/circle.png"
-            alt="Circle Background"
-            width={1000}
-            height={500}
-            className="object-contain opacity-70"
-            priority
+            ref={imageRef}
+            src="/cta/fridge.jpg"
+            alt="Luxury Appliance 1"
+            fill
+            className="object-cover scale-100"
+            unoptimized
           />
         </div>
 
-        {/* Text Content - Reveals as image blurs */}
+        {/* Image Wrapper 2 */}
         <div
-          className="relative z-10 max-w-4xl mx-auto px-4 text-center"
-          style={{
-            opacity: textOpacity,
-            transition: "opacity 0.3s ease-out",
-          }}
+          ref={imageWrapper2Ref}
+          className="absolute left-0 top-0 w-full h-screen overflow-hidden z-10 flex-shrink-0"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-secondary leading-tight">
+          <Image
+            ref={image2Ref}
+            src="/cta/new.png"
+            alt="Luxury Appliance 2"
+            fill
+            className="object-cover scale-100"
+            unoptimized
+          />
+        </div>
+
+        {/* Image Wrapper 3 */}
+        <div
+          ref={imageWrapper3Ref}
+          className="absolute left-0 top-0 w-full h-screen overflow-hidden z-10 flex-shrink-0"
+        >
+          <Image
+            ref={image3Ref}
+            src="/about/story.png"
+            alt="Luxury Appliance 3"
+            fill
+            className="object-cover scale-100"
+            unoptimized
+          />
+        </div>
+
+        {/* Centered Text */}
+        <div
+          ref={textRef}
+          className="absolute inset-0 flex items-center justify-center max-w-4xl mx-auto px-4 text-center z-20 pointer-events-none"
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-secondary leading-tight font-cormorant italic">
             Meet the smartest home appliances known to modern living
           </h2>
         </div>
+
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
 

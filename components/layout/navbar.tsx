@@ -15,7 +15,12 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
   const pathname = usePathname();
+
+  const handleImageError = (imageSrc: string) => {
+    setImageErrors((prev) => ({ ...prev, [imageSrc]: true }));
+  };
   const shouldShowOpaque = isScrolled || pathname !== "/";
 
   useEffect(() => {
@@ -264,42 +269,55 @@ export default function Navbar() {
                     </div>
                     
                     {filteredProducts.length > 0 ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {filteredProducts.map((product) => (
-                          <Link
-                            key={product.id}
-                            href={`/products/${product.id}`}
-                            onClick={() => {
-                              setSearchOpen(false);
-                              setSearchQuery("");
-                            }}
-                            className="group flex gap-4 p-4 bg-white border border-zinc-100 hover:border-cream-200 rounded-2xl hover:shadow-md transition-all duration-300"
-                          >
-                            {/* Thumbnail */}
-                            <div className="w-20 h-20 relative bg-zinc-50 rounded-xl border border-zinc-100 overflow-hidden shrink-0 flex items-center justify-center">
-                              <Image
-                                src={product.image}
-                                alt={product.name}
-                                fill
-                                className="object-contain p-2 group-hover:scale-105 transition-transform duration-500"
-                                unoptimized
-                              />
-                            </div>
-                            
-                            {/* Info */}
-                            <div className="flex-grow min-w-0 flex flex-col justify-center">
-                              <span className="text-[9px] font-bold text-cream-600 uppercase tracking-wider block mb-1">
-                                {product.category}
-                              </span>
-                              <h5 className="text-sm font-bold text-zinc-900 group-hover:text-cream-600 transition-colors truncate">
-                                {product.name}
-                              </h5>
-                              <p className="text-xs font-semibold text-zinc-500 mt-1">
-                                {product.price}
-                              </p>
-                            </div>
-                          </Link>
-                        ))}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8">
+                        {filteredProducts.map((product) => {
+                          const hasImageError = imageErrors[product.image];
+                          return (
+                            <Link
+                              key={product.id}
+                              href={`/products/${product.id}`}
+                              onClick={() => {
+                                setSearchOpen(false);
+                                setSearchQuery("");
+                              }}
+                              className="group flex flex-col"
+                            >
+                              {/* Image Area */}
+                              <div className="aspect-[4/5] relative overflow-hidden bg-white border border-zinc-200/80 rounded-2xl shadow-xs group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                                {(!hasImageError && product.image) ? (
+                                  <Image
+                                    src={product.image}
+                                    alt={product.name}
+                                    fill
+                                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                    onError={() => handleImageError(product.image)}
+                                    unoptimized
+                                  />
+                                ) : (
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <div className="w-16 h-16 bg-zinc-50 flex items-center justify-center text-zinc-400">
+                                      <svg className="w-10 h-10 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l-2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
+                                      </svg>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Details Area */}
+                              <div className="pt-4 px-1">
+                                {/* Product Name */}
+                                <h3 className="text-sm font-bold text-zinc-900 group-hover:text-cream-600 transition-colors line-clamp-1">
+                                  {product.name}
+                                </h3>
+                                {/* Price */}
+                                <p className="text-xs font-semibold text-zinc-500 mt-1">
+                                  {product.price}
+                                </p>
+                              </div>
+                            </Link>
+                          );
+                        })}
                       </div>
                     ) : (
                       <div className="text-center py-20 bg-white rounded-2xl border border-zinc-100 p-8 shadow-sm">

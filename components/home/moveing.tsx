@@ -26,27 +26,27 @@ export default function MovingSection() {
         },
       });
 
-      // 1. Appear from top-left to the right side
+      // 1. Start on the left side (shifted right to -22vw) and glide to the right side (35vw)
       tl.fromTo(
         airfryerRef.current,
         {
-          x: "-100vw",
-          y: "-100vh",
+          x: "-22vw",
+          y: "0vh",
         },
         {
           x: "35vw",
           y: "0vh",
-          duration: 2.4,
-          ease: "power1.out",
+          duration: 2.0,
+          ease: "power1.inOut",
         }
       )
-      // 2. Move from the right side to the left side
+      // 2. Glide from the right side back to the left side
       .to(
         airfryerRef.current,
         {
-          x: "-35vw",
+          x: "-22vw",
           y: "0vh",
-          duration: 1.6,
+          duration: 2.0,
           ease: "power1.inOut",
         }
       );
