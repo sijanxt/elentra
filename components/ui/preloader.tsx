@@ -90,20 +90,12 @@ export default function Preloader() {
           />
 
           <div className="relative flex flex-col items-center gap-12">
-            {/* Top accent line */}
-            <motion.div
-              className="w-12 h-[1px] bg-gradient-to-r from-transparent via-cream-500 to-transparent"
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
-            />
-
             {/* Brand Name - Staggered Letter Reveal */}
             <div className="flex items-center gap-[0.15em]">
               {brandName.split("").map((letter, i) => (
                 <motion.span
                   key={i}
-                  className="text-5xl sm:text-6xl md:text-7xl font-bold text-zinc-900 tracking-[0.15em] inline-block"
+                  className="text-5xl sm:text-6xl md:text-7xl font-cormorant font-light text-zinc-900 tracking-[0.2em] inline-block"
                   initial={{ opacity: 0, y: 40, rotateX: -90 }}
                   animate={{ opacity: 1, y: 0, rotateX: 0 }}
                   transition={{
@@ -117,25 +109,15 @@ export default function Preloader() {
               ))}
             </div>
 
-            {/* Tagline */}
-            <motion.p
-              className="text-[11px] sm:text-xs tracking-[0.35em] uppercase text-zinc-400 font-medium"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 1.2 }}
-            >
-              German-Engineered Luxury
-            </motion.p>
-
             {/* Progress Bar */}
             <motion.div
-              className="relative w-48 sm:w-56"
+              className="relative w-48 sm:w-56 flex flex-col items-center gap-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1 }}
             >
               {/* Track */}
-              <div className="h-[1px] w-full bg-zinc-200 rounded-full overflow-hidden">
+              <div className="h-[1px] w-full bg-zinc-150 rounded-full overflow-hidden">
                 {/* Fill */}
                 <motion.div
                   className="h-full bg-gradient-to-r from-cream-700 via-cream-500 to-cream-400 rounded-full"
@@ -144,15 +126,15 @@ export default function Preloader() {
                 />
               </div>
 
-              {/* Percentage */}
-              <motion.span
-                className="absolute -bottom-6 right-0 text-[10px] text-zinc-400 font-mono tracking-wider"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.2 }}
-              >
-                {progress}%
-              </motion.span>
+              {/* Zero-padded centered counter with a minimal label */}
+              <div className="flex flex-col items-center gap-1">
+                <span className="text-[10px] text-zinc-400 font-montserrat font-light tracking-[0.3em]">
+                  {String(progress).padStart(3, "0")}
+                </span>
+                <span className="text-[8px] uppercase tracking-[0.4em] text-zinc-300 font-montserrat font-medium">
+                  LOADING
+                </span>
+              </div>
             </motion.div>
           </div>
 

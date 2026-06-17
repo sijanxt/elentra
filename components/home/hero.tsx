@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-zinc-950">
+    <div className="relative h-screen w-full overflow-hidden bg-zinc-900">
       {/* Full Background Image */}
       <div className="absolute inset-0">
         <Image

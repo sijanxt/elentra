@@ -1,13 +1,40 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 export default function SoundToggle() {
   const [isMuted, setIsMuted] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize audio on mount
+  useEffect(() => {
+    const audio = new Audio("/audio/music.mp3");
+    audio.loop = true;
+    audio.volume = 0.4;
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.src = "";
+    };
+  }, []);
 
   const toggleSound = useCallback(() => {
-    setIsMuted((prev) => !prev);
+    setIsMuted((prev) => {
+      const next = !prev;
+      const audio = audioRef.current;
+      if (audio) {
+        if (next) {
+          audio.pause();
+        } else {
+          audio.play().catch(() => {
+            // Browser may block autoplay — silently handle
+          });
+        }
+      }
+      return next;
+    });
   }, []);
 
   // Animated bars configuration

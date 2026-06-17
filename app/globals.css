@@ -12,6 +12,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-lora);
   --font-mono: var(--font-lora);
+  --font-cormorant: var(--font-cormorant), serif;
+  --font-montserrat: var(--font-montserrat), sans-serif;
   
   /* Primary & Secondary Colors */
   --color-primary: var(--primary);
