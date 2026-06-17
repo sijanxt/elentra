@@ -57,7 +57,7 @@ export default function AboutPage() {
       <PageHero
         title="About Elentra"
         description="Redefining home comfort through innovation, precision engineering, and sustainable design."
-        bgImage="/hero/hero.png"
+        bgImage="/hero/about_hero.png"
         bgOpacity={0.65}
       />
 
