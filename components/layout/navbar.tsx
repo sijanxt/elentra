@@ -54,7 +54,7 @@ export default function Navbar() {
       isVisible ? "translate-y-0" : "-translate-y-full"
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-14">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className={`text-3xl font-cormorant font-semibold transition-colors duration-300 ${

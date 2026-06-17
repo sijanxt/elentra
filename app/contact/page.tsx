@@ -29,80 +29,82 @@ export default function Contact() {
       <PageHero
         title="Let's bring innovation closer to you."
         description="Whether you're looking for premium home appliances or have questions about our products we'd love to hear from you!"
+        bgImage="/hero/contact_hero.png"
+        bgOpacity={0.65}
       />
 
-      <div className="py-20 px-4">
+      <div className="py-20 px-6 sm:px-8">
         <div className="max-w-5xl mx-auto">
 
           {/* Conversational Form */}
-          <form onSubmit={handleSubmit} className="space-y-6 text-lg sm:text-xl leading-loose text-secondary">
+          <form onSubmit={handleSubmit} className="space-y-8 text-lg sm:text-xl leading-loose text-zinc-800">
             {/* Line 1 - Name and Address on same row */}
-            <div className="flex flex-wrap items-baseline gap-2">
-              <span>Hello, I'm</span>
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-4">
+              <span className="font-light">Hello, I'm</span>
               <input
                 type="text"
                 placeholder="Full Name*"
                 value={formData.name}
                 onChange={(e) => handleInputChange("name", e.target.value)}
-                className="inline-flex min-w-[180px] flex-1 max-w-xs px-2 pb-1 border-b border-cream-300 bg-transparent text-cream-500 placeholder-cream-300/70 focus:outline-none focus:border-cream-500 transition-colors"
+                className="inline-flex min-w-[180px] flex-1 max-w-xs px-2 pb-1 border-b border-zinc-200 bg-transparent text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors font-medium font-montserrat text-base"
                 required
               />
-              <span>and I'm from</span>
+              <span className="font-light">and I'm from</span>
               <input
                 type="text"
                 placeholder="Your Address*"
                 value={formData.address}
                 onChange={(e) => handleInputChange("address", e.target.value)}
-                className="inline-flex min-w-[200px] flex-1 max-w-xs px-2 pb-1 border-b border-cream-300 bg-transparent text-cream-500 placeholder-cream-300/70 focus:outline-none focus:border-cream-500 transition-colors"
+                className="inline-flex min-w-[200px] flex-1 max-w-xs px-2 pb-1 border-b border-zinc-200 bg-transparent text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors font-medium font-montserrat text-base"
                 required
               />
             </div>
 
             {/* Line 2 */}
-            <div className="flex flex-wrap items-baseline gap-2">
-              <span>I'm reaching out because</span>
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-4">
+              <span className="font-light">I'm reaching out because</span>
               <input
                 type="text"
                 placeholder="Select a purpose..."
                 value={formData.purpose}
                 onChange={(e) => handleInputChange("purpose", e.target.value)}
-                className="inline-flex min-w-[220px] flex-1 max-w-md px-2 pb-1 border-b border-cream-300 bg-transparent text-cream-500 placeholder-cream-300/70 focus:outline-none focus:border-cream-500 transition-colors"
+                className="inline-flex min-w-[220px] flex-1 max-w-md px-2 pb-1 border-b border-zinc-200 bg-transparent text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors font-medium font-montserrat text-base"
                 required
               />
             </div>
 
             {/* Line 3 - Email and Phone on same row */}
-            <div className="flex flex-wrap items-baseline gap-2">
-              <span>You can contact me at</span>
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-4">
+              <span className="font-light">You can contact me at</span>
               <input
                 type="email"
                 placeholder="Email Address*"
                 value={formData.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                className="inline-flex min-w-[200px] flex-1 max-w-xs px-2 pb-1 border-b border-cream-300 bg-transparent text-cream-500 placeholder-cream-300/70 focus:outline-none focus:border-cream-500 transition-colors"
+                className="inline-flex min-w-[200px] flex-1 max-w-xs px-2 pb-1 border-b border-zinc-200 bg-transparent text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors font-medium font-montserrat text-base"
                 required
               />
-              <span>and my number is</span>
-              <span className="text-cream-500">+977</span>
+              <span className="font-light">and my number is</span>
+              <span className="text-zinc-500 font-light">+977</span>
               <input
                 type="tel"
                 placeholder="Phone Number*"
                 value={formData.phone}
                 onChange={(e) => handleInputChange("phone", e.target.value)}
-                className="inline-flex min-w-[160px] flex-1 max-w-[200px] px-2 pb-1 border-b border-cream-300 bg-transparent text-cream-500 placeholder-cream-300/70 focus:outline-none focus:border-cream-500 transition-colors"
+                className="inline-flex min-w-[160px] flex-1 max-w-[200px] px-2 pb-1 border-b border-zinc-200 bg-transparent text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors font-medium font-montserrat text-base"
                 required
               />
             </div>
 
             {/* Line 4 - Textarea */}
-            <div className="space-y-3 pt-4">
-              <span className="block">Here's a bit more I'd like to share:</span>
+            <div className="space-y-4 pt-4">
+              <span className="block font-light">Here's a bit more I'd like to share:</span>
               <textarea
                 placeholder="Share your interest, store details, questions..."
                 value={formData.message}
                 onChange={(e) => handleInputChange("message", e.target.value)}
                 rows={4}
-                className="w-full px-0 py-2 border-0 border-b border-cream-300 bg-transparent text-cream-500 placeholder-cream-300/70 focus:outline-none focus:border-cream-500 transition-colors resize-none"
+                className="w-full px-2 py-2 border-0 border-b border-zinc-200 bg-transparent text-zinc-900 placeholder-zinc-400 focus:outline-none focus:border-zinc-900 transition-colors resize-none font-light text-base"
                 required
               />
             </div>
@@ -111,7 +113,7 @@ export default function Contact() {
             <div className="flex justify-end pt-8">
               <button
                 type="submit"
-                className="group px-6 py-2 text-sm bg-transparent border-2 border-cream-600 hover:bg-cream-600 text-cream-600 hover:text-white font-medium rounded-full transition-all duration-300 flex items-center gap-2"
+                className="group px-8 py-3 text-sm bg-transparent border border-zinc-900 hover:bg-zinc-900 text-zinc-900 hover:text-white font-medium rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer"
               >
                 Submit Inquiry
                 <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">

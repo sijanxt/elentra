@@ -9,7 +9,7 @@ interface PageHeroProps {
   bgColor?: string;
   bgImage?: string;
   bgOpacity?: number;
-  sideImage?: string; // Image to show on the right side
+  sideImage?: string; // Optional image on the right side
 }
 
 export default function PageHero({ 
@@ -17,22 +17,27 @@ export default function PageHero({
   description, 
   bgColor = "bg-champagne",
   bgImage,
-  bgOpacity = 0.3,
+  bgOpacity = 0.5,
   sideImage
 }: PageHeroProps) {
   return (
-    <div className={`relative ${bgColor} pt-32 pb-20 px-6 sm:px-8 overflow-hidden`}>
-      {/* Background Image */}
+    <div className={`relative ${bgColor} pt-36 pb-24 px-6 sm:px-8 overflow-hidden`}>
+      {/* Background Image & Overlay */}
       {bgImage && (
-        <div className="absolute inset-0">
-          <Image
-            src={bgImage}
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            style={{ opacity: bgOpacity }}
-          />
-        </div>
+        <>
+          <div className="absolute inset-0">
+            <Image
+              src={bgImage}
+              alt="Hero Background"
+              fill
+              className="object-cover"
+              style={{ opacity: bgOpacity }}
+              priority
+            />
+          </div>
+          {/* Subtle dark overlay for premium legibility */}
+          <div className="absolute inset-0 bg-black/45 z-0" />
+        </>
       )}
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -80,7 +85,9 @@ export default function PageHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-3xl md:text-4xl font-bold text-gray-900 mb-6"
+              className={`text-4xl md:text-5xl font-cormorant font-light mb-6 tracking-wide ${
+                bgImage ? "text-white" : "text-zinc-900"
+              }`}
             >
               {title}
             </motion.h1>
@@ -88,7 +95,9 @@ export default function PageHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed"
+              className={`text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light ${
+                bgImage ? "text-zinc-200" : "text-zinc-600"
+              }`}
             >
               {description}
             </motion.p>
