@@ -77,11 +77,11 @@ export default function Products() {
     setImageErrors((prev) => ({ ...prev, [imageSrc]: true }));
   };
 
-  const categories: Category[] = categoriesData.map((cat) => ({
+  const categories: Category[] = categoriesData.map((cat, index) => ({
     id: cat.id,
     title: cat.title,
     description: cat.description,
-    image: cat.image,
+    image: index === 0 ? "/products/airfryer.png" : cat.image,
     icon: iconMap[cat.iconName],
     products: products.filter((p) => cat.productIds.includes(p.id))
   }));

@@ -9,22 +9,22 @@ export default function Category() {
     {
       name: "Kitchen Appliances",
       tag: "Cooking",
-      image: "/categories/kitchen.png",
+      image: "/products/airfryer.png",
     },
     {
       name: "Cooling Appliances",
       tag: "Freshness",
-      image: "/categories/fridge.png",
+      image: "/categories/cool.png",
     },
     {
       name: "Cleaning Appliances",
       tag: "Effortless",
-      image: "/categories/cleaning.png",
+      image: "/categories/clean.png",
     },
     {
       name: "Smart Home",
       tag: "Intelligent",
-      image: "/categories/smart.png",
+      image: "/categories/home.png",
     },
   ];
 
@@ -94,21 +94,7 @@ export default function Category() {
           })}
         </div>
 
-        {/* View All Categories Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="flex justify-center mt-12"
-        >
-          <Link
-            href="/products"
-            className="px-8 py-2.5 border border-cream-500 hover:bg-cream-500 text-cream-600 hover:text-white text-xs tracking-wider uppercase font-montserrat font-medium rounded-full transition-all duration-300 cursor-pointer shadow-xs text-center"
-          >
-            View All Categories
-          </Link>
-        </motion.div>
+      
 
       </div>
     </section>
