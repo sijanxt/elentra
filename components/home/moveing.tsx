@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -26,7 +27,7 @@ export default function MovingSection() {
         },
       });
 
-      // 1. Start on the left side (shifted right to -22vw) and glide to the right side (35vw)
+      // 1. Start on the left side (shifted right to -22vw) and glide to the right side (20vw)
       tl.fromTo(
         airfryerRef.current,
         {
@@ -34,7 +35,7 @@ export default function MovingSection() {
           y: "0vh",
         },
         {
-          x: "35vw",
+          x: "20vw",
           y: "0vh",
           duration: 2.0,
           ease: "power1.inOut",
@@ -59,25 +60,31 @@ export default function MovingSection() {
     {
       id: 1,
       position: "right",
-      title: "Smart Kitchen Solutions",
-      description: "Experience the future of cooking with our intelligent kitchen appliances designed to make your life easier and more efficient.",
+      category: "01 / CONVECTION",
+      title: "Intelligent Aero-Crisp Technology",
+      description: "Superheated cyclonic air wraps your food to deliver that signature golden-crisp finish with up to 90% less oil. Professional convection, simplified.",
+      link: "/products",
     },
     {
       id: 2,
       position: "left",
-      title: "Advanced Cooling Technology",
-      description: "Keep your food fresh longer with our state-of-the-art refrigeration systems that combine style with functionality.",
+      category: "02 / PRECISION",
+      title: "Smart Thermal Probe Assist",
+      description: "Integrated digital thermal sensor probes monitor internal temperature in real-time, automatically adjusting cook heat to guarantee perfectly tender results every time.",
+      link: "/products",
     },
     {
       id: 3,
       position: "right",
-      title: "Effortless Cleaning",
-      description: "Revolutionary cleaning appliances that save time and energy while delivering professional-grade results.",
+      category: "03 / CONNECTIVITY",
+      title: "Seamless Smart Integration",
+      description: "Command your kitchen remotely. Monitor cooking progress, access chef-curated presets, and receive real-time notifications directly on your smart device.",
+      link: "/products",
     },
   ];
 
   return (
-    <section ref={airfryerContainerRef} className="relative bg-zinc-50 grid grid-cols-1 grid-rows-1">
+    <section ref={airfryerContainerRef} className="relative bg-white grid grid-cols-1 grid-rows-1">
       {/* Sticky Airfryer Section - Act as background overlay */}
       <div className="col-start-1 row-start-1 sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden pointer-events-none z-10">
         <div
@@ -98,6 +105,7 @@ export default function MovingSection() {
         {sections.map((section) => (
           <div
             key={section.id}
+            id={`moving-section-${section.id}`}
             className="min-h-[100vh] flex items-center justify-center py-20 px-4"
           >
             <div className="max-w-7xl mx-auto w-full">
@@ -107,13 +115,21 @@ export default function MovingSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
                 className={`${
-                  section.position === "right" ? "ml-auto text-right" : "mr-auto text-left"
-                } max-w-2xl`}
+                  section.position === "right" ? "ml-auto text-left" : "mr-auto text-left"
+                } max-w-xl`}
               >
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-6">
+                {/* Category Indicator */}
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-cream-600 block mb-3 font-montserrat">
+                  {section.category}
+                </span>
+
+                {/* Section Title */}
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-secondary mb-5 font-cormorant leading-tight">
                   {section.title}
                 </h2>
-                <p className="text-lg text-zinc-600 leading-relaxed">
+
+                {/* Section Description */}
+                <p className="text-base sm:text-lg text-zinc-600 leading-relaxed mb-0 font-light">
                   {section.description}
                 </p>
               </motion.div>
