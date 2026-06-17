@@ -40,8 +40,9 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${lora.variable} ${cormorant.variable} ${montserrat.variable} h-full antialiased scroll-smooth`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-white text-zinc-900 transition-colors duration-300 font-lora">
+      <body className="min-h-full flex flex-col bg-white text-zinc-900 transition-colors duration-300 font-lora" suppressHydrationWarning>
         <Preloader />
         <LenisProvider>
           <Navbar />
