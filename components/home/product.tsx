@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { products, Product } from "@/lib/products";
@@ -49,21 +49,7 @@ const categoryIconMap: Record<string, string> = {
 };
 
 export default function Products() {
-  const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
-
-  // Prevent body scroll when modal is open
-  useEffect(() => {
-    if (activeProduct) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [activeProduct]);
 
   const handleImageError = (imageSrc: string) => {
     setImageErrors((prev) => ({ ...prev, [imageSrc]: true }));
@@ -91,9 +77,9 @@ export default function Products() {
           {products.slice(0, 8).map((product) => {
             const hasImageError = imageErrors[product.image];
             return (
-              <div
+              <Link
                 key={product.id}
-                onClick={() => setActiveProduct(product)}
+                href={`/products/${product.id}`}
                 className="group cursor-pointer flex flex-col"
               >
                 {/* Image Area */}
@@ -126,139 +112,11 @@ export default function Products() {
                     {product.price}
                   </p>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
       </div>
-
-      {/* Product Details Modal */}
-      {activeProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 animate-fade-in">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-zinc-900/40 backdrop-blur-sm"
-            onClick={() => setActiveProduct(null)}
-          />
-
-          {/* Modal Container */}
-          <div className="relative bg-white w-full max-w-2xl rounded-2xl border border-zinc-200 shadow-2xl overflow-hidden max-h-[85vh] flex flex-col animate-fade-in-up">
-            
-            {/* Modal Header */}
-            <div className="p-6 sm:p-8 border-b border-zinc-200 flex justify-between items-center bg-cream-50/40">
-              <div className="flex items-center space-x-4">
-                <div className="w-10 h-10 rounded-lg bg-cream-50 flex items-center justify-center border border-cream-200/40 shadow-xs">
-                  {iconMap[categoryIconMap[activeProduct.category] || "utensils"]}
-                </div>
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-zinc-900 line-clamp-1">
-                    {activeProduct.name}
-                  </h3>
-                  <p className="text-xs text-zinc-500 font-light">
-                    {activeProduct.category}
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={() => setActiveProduct(null)}
-                className="text-zinc-400 hover:text-zinc-900 p-2 hover:bg-zinc-100 rounded-lg transition-colors"
-                aria-label="Close modal"
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            {/* Modal Body (Scrollable) */}
-            <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-grow">
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                {/* Image side */}
-                <div className="aspect-[4/5] w-full md:w-48 relative bg-zinc-50 rounded-xl border border-zinc-100 flex items-center justify-center overflow-hidden shrink-0">
-                  <Image
-                    src={activeProduct.image}
-                    alt={activeProduct.name}
-                    fill
-                    className="object-contain p-4"
-                  />
-                </div>
-
-                {/* Details side */}
-                <div className="space-y-4 flex-grow w-full">
-                  <div className="flex flex-wrap items-center gap-2.5">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider py-1 px-2.5 rounded bg-cream-50 text-cream-700">
-                      {activeProduct.tag}
-                    </span>
-                    <span className={`text-[10px] font-semibold uppercase tracking-wider py-1 px-2.5 rounded ${
-                      activeProduct.status === "In Stock" 
-                        ? "bg-emerald-50 text-emerald-600 border border-emerald-200/50" 
-                        : activeProduct.status === "Limited Edition"
-                        ? "bg-amber-50 text-amber-600 border border-amber-200/50"
-                        : "bg-blue-50 text-blue-600 border border-blue-200/50"
-                    }`}>
-                      {activeProduct.status}
-                    </span>
-                    <span className="text-sm font-bold text-zinc-900 ml-auto">
-                      {activeProduct.price}
-                    </span>
-                  </div>
-                  
-                  <p className="text-sm text-zinc-500 font-light leading-relaxed">
-                    {activeProduct.description}
-                  </p>
-
-                  <div className="border-t border-zinc-100 pt-4 space-y-3">
-                    <h5 className="text-xs font-bold text-zinc-900 uppercase tracking-wider">Specifications</h5>
-                    <div className="flex flex-wrap gap-2">
-                      {activeProduct.specs.map((spec, specIdx) => (
-                        <span
-                          key={specIdx}
-                          className="text-[11px] font-medium text-zinc-600 bg-zinc-50 border border-zinc-200 py-1 px-3 rounded-full"
-                        >
-                          {spec}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="border-t border-zinc-100 pt-4 space-y-2">
-                    <div className="grid grid-cols-2 gap-4 text-xs">
-                      <div>
-                        <span className="text-zinc-400 block font-light">Dimensions</span>
-                        <span className="text-zinc-700 font-medium">{activeProduct.dimensions}</span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-400 block font-light">Warranty</span>
-                        <span className="text-zinc-700 font-medium">{activeProduct.warranty}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="p-6 border-t border-zinc-200 bg-zinc-50 flex justify-between items-center">
-              <Link
-                href={`/contact?inquiry=${encodeURIComponent(activeProduct.name)}`}
-                onClick={() => setActiveProduct(null)}
-                className="inline-flex items-center text-xs font-semibold uppercase tracking-wider bg-zinc-900 hover:bg-zinc-800 text-white py-2.5 px-5 rounded-lg shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
-              >
-                Inquire Now
-                <svg className="w-3.5 h-3.5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-              <button
-                onClick={() => setActiveProduct(null)}
-                className="px-6 py-2.5 border border-zinc-300 hover:bg-zinc-100 text-zinc-700 rounded-lg text-sm font-medium transition-all"
-              >
-                Close details
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
