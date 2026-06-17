@@ -3,24 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { products, categories as categoriesData } from "@/lib/products";
-
-interface ProductItem {
-  name: string;
-  specs: string[];
-  description: string;
-  status: "In Stock" | "Limited Edition" | "Pre-order";
-  tag: string;
-}
-
-interface Category {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  icon: React.ReactNode;
-  products: ProductItem[];
-}
+import { products, Product } from "@/lib/products";
 
 const iconMap: Record<string, React.ReactNode> = {
   utensils: (
@@ -56,13 +39,22 @@ const iconMap: Record<string, React.ReactNode> = {
   ),
 };
 
+const categoryIconMap: Record<string, string> = {
+  "Kitchen Appliances": "utensils",
+  "Refrigeration": "refrigerator",
+  "Climate Control": "thermometer",
+  "Laundry Care": "washer",
+  "Cleaning": "vacuum",
+  "Smart Home": "smartphone"
+};
+
 export default function Products() {
-  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
+  const [activeProduct, setActiveProduct] = useState<Product | null>(null);
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
 
   // Prevent body scroll when modal is open
   useEffect(() => {
-    if (activeCategory) {
+    if (activeProduct) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -71,24 +63,15 @@ export default function Products() {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [activeCategory]);
+  }, [activeProduct]);
 
   const handleImageError = (imageSrc: string) => {
     setImageErrors((prev) => ({ ...prev, [imageSrc]: true }));
   };
 
-  const categories: Category[] = categoriesData.map((cat, index) => ({
-    id: cat.id,
-    title: cat.title,
-    description: cat.description,
-    image: index === 0 ? "/products/airfryer.png" : cat.image,
-    icon: iconMap[cat.iconName],
-    products: products.filter((p) => cat.productIds.includes(p.id))
-  }));
-
   return (
     <section id="products" className="bg-zinc-50 py-28">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-4 mb-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-cream-600">
@@ -99,44 +82,49 @@ export default function Products() {
             </h2>
           </div>
           <p className="text-lg text-zinc-500">
-            Explore our curated collection by category
+            Explore our premium collection of luxury home appliances
           </p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category) => {
-            const hasImageError = imageErrors[category.image];
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {products.slice(0, 8).map((product) => {
+            const hasImageError = imageErrors[product.image];
             return (
               <div
-                key={category.id}
-                onClick={() => setActiveCategory(category)}
-                className="group cursor-pointer"
+                key={product.id}
+                onClick={() => setActiveProduct(product)}
+                className="group cursor-pointer flex flex-col"
               >
                 {/* Image Area */}
-                <div className="aspect-[4/5] relative overflow-hidden bg-zinc-100 mb-4">
-                  {(!hasImageError && category.image) ? (
+                <div className="aspect-[4/5] relative overflow-hidden bg-white border border-zinc-200/80 rounded-2xl shadow-xs group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                  {(!hasImageError && product.image) ? (
                     <Image
-                      src={category.image}
-                      alt={category.title}
+                      src={product.image}
+                      alt={product.name}
                       fill
-                      className="object-contain"
-                      onError={() => handleImageError(category.image)}
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      onError={() => handleImageError(product.image)}
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-20 h-20 bg-zinc-200 flex items-center justify-center">
-                        {category.icon}
+                      <div className="w-20 h-20 bg-zinc-50 flex items-center justify-center text-zinc-400">
+                        {iconMap[categoryIconMap[product.category] || "utensils"]}
                       </div>
                     </div>
                   )}
                 </div>
 
-                {/* Category Name */}
-                <div className="text-center">
-                  <h3 className="text-lg font-medium text-zinc-900 group-hover:text-cream-600 transition-colors">
-                    {category.title}
+                {/* Details Area */}
+                <div className="pt-4 px-1">
+                  {/* Product Name */}
+                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 group-hover:text-cream-600 transition-colors line-clamp-1">
+                    {product.name}
                   </h3>
+                  {/* Price */}
+                  <p className="text-xs sm:text-sm font-semibold text-zinc-500 mt-1">
+                    {product.price}
+                  </p>
                 </div>
               </div>
             );
@@ -144,35 +132,35 @@ export default function Products() {
         </div>
       </div>
 
-      {/* Category Products Modal */}
-      {activeCategory && (
+      {/* Product Details Modal */}
+      {activeProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4 animate-fade-in">
           {/* Backdrop */}
           <div
             className="absolute inset-0 bg-zinc-900/40 backdrop-blur-sm"
-            onClick={() => setActiveCategory(null)}
+            onClick={() => setActiveProduct(null)}
           />
 
           {/* Modal Container */}
-          <div className="relative bg-white w-full max-w-3xl rounded-2xl border border-zinc-200 shadow-2xl overflow-hidden max-h-[85vh] flex flex-col animate-fade-in-up">
+          <div className="relative bg-white w-full max-w-2xl rounded-2xl border border-zinc-200 shadow-2xl overflow-hidden max-h-[85vh] flex flex-col animate-fade-in-up">
             
             {/* Modal Header */}
             <div className="p-6 sm:p-8 border-b border-zinc-200 flex justify-between items-center bg-cream-50/40">
               <div className="flex items-center space-x-4">
                 <div className="w-10 h-10 rounded-lg bg-cream-50 flex items-center justify-center border border-cream-200/40 shadow-xs">
-                  {activeCategory.icon}
+                  {iconMap[categoryIconMap[activeProduct.category] || "utensils"]}
                 </div>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-zinc-900">
-                    {activeCategory.title}
+                  <h3 className="text-xl sm:text-2xl font-bold text-zinc-900 line-clamp-1">
+                    {activeProduct.name}
                   </h3>
                   <p className="text-xs text-zinc-500 font-light">
-                    Featured German Engineering Collection
+                    {activeProduct.category}
                   </p>
                 </div>
               </div>
               <button
-                onClick={() => setActiveCategory(null)}
+                onClick={() => setActiveProduct(null)}
                 className="text-zinc-400 hover:text-zinc-900 p-2 hover:bg-zinc-100 rounded-lg transition-colors"
                 aria-label="Close modal"
               >
@@ -183,41 +171,49 @@ export default function Products() {
             </div>
 
             {/* Modal Body (Scrollable) */}
-            <div className="p-6 sm:p-8 overflow-y-auto space-y-8 flex-grow">
-              {activeCategory.products.map((product, index) => (
-                <div
-                  key={index}
-                  className="bg-zinc-50 rounded-xl p-6 border border-zinc-200 flex flex-col sm:flex-row justify-between gap-6"
-                >
-                  <div className="space-y-3 max-w-xl">
-                    <div className="flex flex-wrap items-center gap-2.5">
-                      <h4 className="text-base sm:text-lg font-bold text-zinc-900">
-                        {product.name}
-                      </h4>
-                      <span className="text-[10px] font-semibold uppercase tracking-wider py-1 px-2.5 rounded bg-cream-50 text-cream-700">
-                        {product.tag}
-                      </span>
-                      <span className={`text-[10px] font-semibold uppercase tracking-wider py-1 px-2.5 rounded ${
-                        product.status === "In Stock" 
-                          ? "bg-emerald-50 text-emerald-600 border border-emerald-200/50" 
-                          : product.status === "Limited Edition"
-                          ? "bg-amber-50 text-amber-600 border border-amber-200/50"
-                          : "bg-blue-50 text-blue-600 border border-blue-200/50"
-                      }`}>
-                        {product.status}
-                      </span>
-                    </div>
-                    
-                    <p className="text-sm text-zinc-500 font-light leading-relaxed">
-                      {product.description}
-                    </p>
+            <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-grow">
+              <div className="flex flex-col md:flex-row gap-8 items-start">
+                {/* Image side */}
+                <div className="aspect-[4/5] w-full md:w-48 relative bg-zinc-50 rounded-xl border border-zinc-100 flex items-center justify-center overflow-hidden shrink-0">
+                  <Image
+                    src={activeProduct.image}
+                    alt={activeProduct.name}
+                    fill
+                    className="object-contain p-4"
+                  />
+                </div>
 
-                    {/* Specifications Chips */}
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {product.specs.map((spec, specIdx) => (
+                {/* Details side */}
+                <div className="space-y-4 flex-grow w-full">
+                  <div className="flex flex-wrap items-center gap-2.5">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider py-1 px-2.5 rounded bg-cream-50 text-cream-700">
+                      {activeProduct.tag}
+                    </span>
+                    <span className={`text-[10px] font-semibold uppercase tracking-wider py-1 px-2.5 rounded ${
+                      activeProduct.status === "In Stock" 
+                        ? "bg-emerald-50 text-emerald-600 border border-emerald-200/50" 
+                        : activeProduct.status === "Limited Edition"
+                        ? "bg-amber-50 text-amber-600 border border-amber-200/50"
+                        : "bg-blue-50 text-blue-600 border border-blue-200/50"
+                    }`}>
+                      {activeProduct.status}
+                    </span>
+                    <span className="text-sm font-bold text-zinc-900 ml-auto">
+                      {activeProduct.price}
+                    </span>
+                  </div>
+                  
+                  <p className="text-sm text-zinc-500 font-light leading-relaxed">
+                    {activeProduct.description}
+                  </p>
+
+                  <div className="border-t border-zinc-100 pt-4 space-y-3">
+                    <h5 className="text-xs font-bold text-zinc-900 uppercase tracking-wider">Specifications</h5>
+                    <div className="flex flex-wrap gap-2">
+                      {activeProduct.specs.map((spec, specIdx) => (
                         <span
                           key={specIdx}
-                          className="text-[11px] font-medium text-zinc-600 bg-white border border-zinc-200 py-1 px-3 rounded-full"
+                          className="text-[11px] font-medium text-zinc-600 bg-zinc-50 border border-zinc-200 py-1 px-3 rounded-full"
                         >
                           {spec}
                         </span>
@@ -225,29 +221,39 @@ export default function Products() {
                     </div>
                   </div>
 
-                  <div className="flex sm:flex-col justify-end items-end shrink-0 pt-2 sm:pt-0">
-                    <Link
-                      href={`/contact?inquiry=${encodeURIComponent(product.name)}`}
-                      onClick={() => setActiveCategory(null)}
-                      className="inline-flex items-center text-xs font-semibold uppercase tracking-wider bg-zinc-900 hover:bg-zinc-800 text-white py-2.5 px-4 rounded-lg shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      Inquire
-                      <svg className="w-3.5 h-3.5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+                  <div className="border-t border-zinc-100 pt-4 space-y-2">
+                    <div className="grid grid-cols-2 gap-4 text-xs">
+                      <div>
+                        <span className="text-zinc-400 block font-light">Dimensions</span>
+                        <span className="text-zinc-700 font-medium">{activeProduct.dimensions}</span>
+                      </div>
+                      <div>
+                        <span className="text-zinc-400 block font-light">Warranty</span>
+                        <span className="text-zinc-700 font-medium">{activeProduct.warranty}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-zinc-200 bg-zinc-50 flex justify-end">
+            <div className="p-6 border-t border-zinc-200 bg-zinc-50 flex justify-between items-center">
+              <Link
+                href={`/contact?inquiry=${encodeURIComponent(activeProduct.name)}`}
+                onClick={() => setActiveProduct(null)}
+                className="inline-flex items-center text-xs font-semibold uppercase tracking-wider bg-zinc-900 hover:bg-zinc-800 text-white py-2.5 px-5 rounded-lg shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Inquire Now
+                <svg className="w-3.5 h-3.5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </Link>
               <button
-                onClick={() => setActiveCategory(null)}
+                onClick={() => setActiveProduct(null)}
                 className="px-6 py-2.5 border border-zinc-300 hover:bg-zinc-100 text-zinc-700 rounded-lg text-sm font-medium transition-all"
               >
-                Close Gallery
+                Close details
               </button>
             </div>
           </div>
