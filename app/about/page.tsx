@@ -2,11 +2,20 @@
 
 import Link from "next/link";
 import PageHero from "@/components/ui/page-hero";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import OurTeam from "./components/ourteam";
+import Image from "next/image";
+import { useRef } from "react";
 
 export default function AboutPage() {
+  const storyImageContainerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: storyImageContainerRef,
+    offset: ["start end", "end start"]
+  });
 
+  const storyImageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
     <div className="min-h-screen bg-white pb-16">
@@ -72,11 +81,23 @@ export default function AboutPage() {
                 Today, we continue to push the boundaries of what's possible, combining German engineering precision with smart technology to create appliances that don't just work—they enhance your entire living experience.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-cream-50 to-cream-100/50 rounded-3xl h-96 flex items-center justify-center border border-cream-200/20 shadow-sm">
-              <div className="text-center">
-                <div className="text-6xl font-cormorant font-light text-cream-600 mb-2">15+</div>
-                <p className="text-zinc-500 font-montserrat tracking-wider text-xs uppercase font-semibold">Years of Innovation</p>
-              </div>
+            <div
+              ref={storyImageContainerRef}
+              className="relative h-96 w-full rounded-3xl overflow-hidden shadow-md border border-zinc-100"
+            >
+              <motion.div
+                style={{ y: storyImageY }}
+                className="absolute inset-0 h-[120%] w-full -top-[10%]"
+              >
+                <Image
+                  src="/about/story.png"
+                  alt="Elentra Luxury Kitchen"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </motion.div>
             </div>
           </div>
         </div>
