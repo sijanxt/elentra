@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function RevealSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -25,7 +24,6 @@ export default function RevealSection() {
   useEffect(() => {
     if (
       !containerRef.current ||
-      !stickyRef.current ||
       !textRef.current ||
       !imageWrapperRef.current ||
       !imageRef.current ||
@@ -51,13 +49,6 @@ export default function RevealSection() {
           scrub: 1,
         },
       });
-
-      // Smoothly animate the background color back to white during Phase 3
-      tl.to(stickyRef.current, {
-        backgroundColor: "#ffffff",
-        duration: 0.35,
-        ease: "power2.inOut",
-      }, 0.65);
 
       // --- PHASE 1: Text Fades, Background Image 1 Expands (Progress 0 to 0.3) ---
       tl.to(textRef.current, {
@@ -135,11 +126,7 @@ export default function RevealSection() {
   return (
     <div ref={containerRef} className="relative w-full" style={{ height: "320vh" }}>
       {/* Pinned Viewport */}
-      <div
-        ref={stickyRef}
-        className="sticky top-0 h-screen w-full overflow-hidden"
-        style={{ backgroundColor: "#c6fcff" }}
-      >
+      <div className="sticky top-0 h-screen w-full bg-zinc-50 overflow-hidden">
         
         {/* Expanding Image Wrapper 1 */}
         <div

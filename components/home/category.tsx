@@ -1,36 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Category() {
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!sectionRef.current) return;
-
-    const ctx = gsap.context(() => {
-      gsap.to(sectionRef.current, {
-        backgroundColor: "#c6fcff",
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 60%",
-          scrub: true,
-        },
-      });
-    });
-
-    return () => ctx.revert();
-  }, []);
-
   const categories = [
     {
       name: "Kitchen Appliances",
@@ -55,7 +29,7 @@ export default function Category() {
   ];
 
   return (
-    <section ref={sectionRef} className="bg-white py-24 border-b border-zinc-100">
+    <section className="bg-white py-24 border-b border-zinc-100">
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* Header */}
