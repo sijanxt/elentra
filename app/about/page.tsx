@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import PageHero from "@/components/ui/page-hero";
+import OurTeam from "./components/ourteam";
 
 export default function AboutPage() {
   return (
@@ -14,16 +15,16 @@ export default function AboutPage() {
         bgOpacity={0.65}
       />
 
-      {/* Main Content */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto">
+      {/* Main Content - Company Story */}
+      <section className="pt-24 pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Company Story */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-20"
+            className="mb-8"
           >
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl sm:text-4xl font-bold text-secondary mb-6">
@@ -37,53 +38,15 @@ export default function AboutPage() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Values Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-20"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-secondary text-center mb-12">
-              Our Values
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "Quality First",
-                  description: "We never compromise on quality, ensuring every product meets the highest standards.",
-                },
-                {
-                  title: "Innovation",
-                  description: "Constantly evolving with technology to bring you the latest smart home solutions.",
-                },
-                {
-                  title: "Customer Focus",
-                  description: "Your satisfaction is our priority, from selection to after-sales support.",
-                },
-              ].map((value, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
-                  className="bg-zinc-50 p-8 rounded-2xl border border-zinc-200"
-                >
-                  <h3 className="text-xl font-bold text-secondary mb-4">
-                    {value.title}
-                  </h3>
-                  <p className="text-zinc-600 leading-relaxed">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+      {/* Our Team Section */}
+      <OurTeam />
 
-          {/* Stats Section */}
+      {/* Stats Section */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
