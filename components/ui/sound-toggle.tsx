@@ -30,7 +30,7 @@ export default function SoundToggle() {
     >
       {/* Label */}
       <motion.span
-        className="text-[10px] uppercase tracking-[0.2em] font-medium text-zinc-500 group-hover:text-zinc-300 transition-colors duration-300 hidden sm:inline"
+        className="text-[10px] uppercase tracking-[0.2em] font-medium text-zinc-400 group-hover:text-zinc-600 transition-colors duration-300 hidden sm:inline"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.5 }}
@@ -74,7 +74,7 @@ export default function SoundToggle() {
 
       {/* Subtle ring indicator */}
       <motion.div
-        className="absolute inset-[-8px] rounded-full border border-zinc-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute inset-[-8px] rounded-full border border-zinc-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{ borderRadius: "999px" }}
       />
     </motion.button>
