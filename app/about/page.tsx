@@ -1,4 +1,5 @@
 import Link from "next/link";
+import PageHero from "@/components/ui/page-hero";
 
 export default function AboutPage() {
   const values = [
@@ -51,20 +52,16 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-primary pt-24 pb-16">
+    <div className="min-h-screen bg-white pb-16">
       {/* Hero Section */}
-      <div className="bg-secondary text-primary py-20 px-4 mb-16">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-6xl font-extrabold mb-6 tracking-tight">
-            About Elentra
-          </h1>
-          <p className="text-lg sm:text-xl text-primary/80 leading-relaxed">
-            Redefining home comfort through innovation, precision engineering, and sustainable design.
-          </p>
-        </div>
-      </div>
+      <PageHero
+        title="About Elentra"
+        description="Redefining home comfort through innovation, precision engineering, and sustainable design."
+        bgImage="/hero/hero.png"
+        bgOpacity={0.65}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
         {/* Story Section */}
         <div className="mb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
