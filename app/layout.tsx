@@ -45,7 +45,7 @@ export default function RootLayout({
         <Preloader />
         <LenisProvider>
           <Navbar />
-          <main className="flex-grow">
+          <main className="relative z-10 bg-white flex-grow shadow-[0_15px_30px_rgba(0,0,0,0.08)]">
             {children}
           </main>
           <Footer />

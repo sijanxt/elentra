@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ArrowRight, Mail, Phone, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="w-full">
+    <footer className="w-full md:sticky md:bottom-0 md:-z-10">
       {/* Top Section: Contact Banner */}
       <div className="bg-white border-t border-zinc-100 py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-4">
@@ -46,15 +47,10 @@ export default function Footer() {
               href="/contact"
               className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-cream-500 flex items-center justify-center text-zinc-950 hover:bg-zinc-900 hover:text-white transition-all duration-300 shadow-md group cursor-pointer shrink-0"
             >
-              <svg
+              <ArrowRight
                 className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2.5"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+                strokeWidth={2.5}
+              />
             </Link>
           </motion.div>
         </div>
@@ -96,16 +92,21 @@ export default function Footer() {
               <h3 className="text-zinc-500 text-xs font-semibold uppercase tracking-widest font-montserrat mb-3">
                 Kathmandu (HQ)
               </h3>
-              <div className="space-y-1">
+              <div className="space-y-2.5">
                 <a
                   href="mailto:info@elentra.com.np"
-                  className="block text-white hover:text-cream-500 transition-colors w-max"
+                  className="flex items-center gap-2 text-white hover:text-cream-500 transition-colors w-max"
                 >
-                  info@elentra.com.np
+                  <Mail className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  <span>info@elentra.com.np</span>
                 </a>
-                <p className="font-montserrat text-zinc-300 font-normal text-xs">+977 1 4000000</p>
-                <p className="leading-relaxed text-zinc-400 text-xs">
-                  Maharajgunj, Kathmandu, Nepal
+                <p className="flex items-center gap-2 font-montserrat text-zinc-300 font-normal text-xs">
+                  <Phone className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  <span>+977 1 4000000</span>
+                </p>
+                <p className="flex items-start gap-2 leading-relaxed text-zinc-400 text-xs">
+                  <MapPin className="w-3.5 h-3.5 text-zinc-500 mt-0.5 shrink-0" />
+                  <span>Maharajgunj, Kathmandu, Nepal</span>
                 </p>
               </div>
             </div>
@@ -114,16 +115,21 @@ export default function Footer() {
               <h3 className="text-zinc-500 text-xs font-semibold uppercase tracking-widest font-montserrat mb-3">
                 Lalitpur Showroom
               </h3>
-              <div className="space-y-1">
+              <div className="space-y-2.5">
                 <a
                   href="mailto:sales@elentra.com.np"
-                  className="block text-white hover:text-cream-500 transition-colors w-max"
+                  className="flex items-center gap-2 text-white hover:text-cream-500 transition-colors w-max"
                 >
-                  sales@elentra.com.np
+                  <Mail className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  <span>sales@elentra.com.np</span>
                 </a>
-                <p className="font-montserrat text-zinc-300 font-normal text-xs">+977 1 5000000</p>
-                <p className="leading-relaxed text-zinc-400 text-xs">
-                  Pulchowk, Lalitpur, Nepal
+                <p className="flex items-center gap-2 font-montserrat text-zinc-300 font-normal text-xs">
+                  <Phone className="w-3.5 h-3.5 text-zinc-500 shrink-0" />
+                  <span>+977 1 5000000</span>
+                </p>
+                <p className="flex items-start gap-2 leading-relaxed text-zinc-400 text-xs">
+                  <MapPin className="w-3.5 h-3.5 text-zinc-500 mt-0.5 shrink-0" />
+                  <span>Pulchowk, Lalitpur, Nepal</span>
                 </p>
               </div>
             </div>
@@ -181,12 +187,20 @@ export default function Footer() {
               <h3 className="text-zinc-500 text-xs font-semibold uppercase tracking-widest font-montserrat mb-4">
                 Want to upgrade your home?
               </h3>
-              <a
-                href="/contact"
-                className="text-xs text-white border-b border-white hover:text-cream-500 hover:border-cream-500 pb-1 font-semibold tracking-wider uppercase inline-flex items-center gap-1.5 transition-all"
-              >
-                Sign up for our newsletter
-              </a>
+              <form onSubmit={(e) => e.preventDefault()} className="flex items-center gap-2 max-w-sm mt-3 border-b border-zinc-700 pb-1 group focus-within:border-cream-500 transition-colors duration-300">
+                <input
+                  type="email"
+                  placeholder="Your email address"
+                  className="w-full bg-transparent text-white text-xs font-light py-1 focus:outline-none placeholder-zinc-500"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="text-xs text-white hover:text-cream-500 font-semibold tracking-wider uppercase flex items-center gap-1 transition-all cursor-pointer whitespace-nowrap px-1 py-1"
+                >
+                  Subscribe
+                </button>
+              </form>
             </div>
 
             <div>
@@ -195,14 +209,14 @@ export default function Footer() {
               </h3>
               <div className="flex items-center gap-5 text-white">
                 <a
-                  href="https://behance.net"
+                  href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-cream-500 transition-colors p-1"
-                  aria-label="Behance"
+                  aria-label="Facebook"
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M8.228 15.01h-2.146V8.99h-2.146V8.99h2.146c1.199 0 1.963.636 1.963 1.575 0 .718-.467 1.25-1.137 1.417.835.156 1.32.754 1.32 1.562.001 1.06-.871 1.466-2.146 1.466zm-1.073-4.87h1.071c.516 0 .805-.23.805-.603 0-.374-.289-.607-.805-.607H7.155v1.21zm0 3.723h1.197c.541 0 .878-.254.878-.656 0-.41-.337-.674-.878-.674H7.155v1.33zm9.055-1.451h3.085c-.106.931-.878 1.451-1.794 1.451-1.024 0-1.817-.754-1.817-1.805 0-1.104.783-1.828 1.817-1.828 1.006 0 1.734.685 1.77 1.704h-3.061zm-.19-4.669h2.7v.601h-2.7V7.743zm.095 4.398c0-.437-.275-.68-.707-.68-.423 0-.705.243-.739.68h1.446z" />
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                   </svg>
                 </a>
                 <a
