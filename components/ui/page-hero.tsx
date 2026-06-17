@@ -36,6 +36,7 @@ export default function PageHero({
               className="object-cover"
               style={{ opacity: bgOpacity }}
               priority
+              unoptimized
             />
           </div>
           {/* Subtle dark overlay for premium legibility */}

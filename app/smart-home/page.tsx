@@ -90,6 +90,8 @@ export default function SmartHomePage() {
       <PageHero
         title="Smart Home Solutions"
         description="Transform your living space with intelligent automation and seamless connectivity"
+        bgImage="/categories/smart.png"
+        bgOpacity={0.65}
       />
       {/* Featured Products Section */}
       <section className="py-24 bg-white">

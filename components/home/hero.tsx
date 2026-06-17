@@ -16,6 +16,7 @@ export default function Hero() {
           alt="Elentra Luxury Home Appliances"
           fill
           priority
+          unoptimized
           className="object-cover"
           quality={100}
         />

@@ -38,9 +38,11 @@ export default function ProductsPage() {
       <PageHero
         title="Our Products"
         description="Discover our complete collection of premium home appliances designed for modern living."
+        bgImage="/cta/fridge.jpg"
+        bgOpacity={0.65}
       />
       
-      <div className="max-w-7xl mx-auto py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Search & Filter */}
         <div className="mb-16">
           {/* Search Bar */}
@@ -73,41 +75,44 @@ export default function ProductsPage() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mb-16">
           {filteredProducts.map((product) => (
             <Link
               key={product.id}
               href={`/products/${product.id}`}
-              className="group"
+              className="group flex flex-col"
             >
-              <div className="bg-white transition-all duration-300">
-                {/* Product Image */}
-                <div className="aspect-[4/5] bg-zinc-100 relative overflow-hidden mb-4">
-                  {(!imageErrors[product.image] && product.image) ? (
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-contain"
-                      onError={() => handleImageError(product.image)}
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-32 h-32 bg-zinc-200 flex items-center justify-center">
-                        <svg className="w-16 h-16 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
-                        </svg>
-                      </div>
+              {/* Image Area */}
+              <div className="aspect-[4/5] relative overflow-hidden bg-white border border-zinc-200/80 rounded-2xl shadow-xs group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                {(!imageErrors[product.image] && product.image) ? (
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    onError={() => handleImageError(product.image)}
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-20 h-20 bg-zinc-50 flex items-center justify-center text-zinc-400">
+                      <svg className="w-12 h-12 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25" />
+                      </svg>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
+              </div>
 
-                {/* Product Info */}
-                <div className="text-center">
-                  <h3 className="text-lg font-medium text-secondary group-hover:text-zinc-600 transition-colors">
-                    {product.name}
-                  </h3>
-                </div>
+              {/* Details Area */}
+              <div className="pt-4 px-1">
+                {/* Product Name */}
+                <h3 className="text-sm sm:text-base font-bold text-zinc-900 group-hover:text-cream-600 transition-colors line-clamp-1">
+                  {product.name}
+                </h3>
+                {/* Price */}
+                <p className="text-xs sm:text-sm font-semibold text-zinc-500 mt-1">
+                  {product.price}
+                </p>
               </div>
             </Link>
           ))}
