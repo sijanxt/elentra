@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { usePreloaderFinished } from "@/hooks/use-preloader";
 
 interface PageHeroProps {
   title: string;
@@ -20,6 +21,8 @@ export default function PageHero({
   bgOpacity = 0.5,
   sideImage
 }: PageHeroProps) {
+  const isPreloaderFinished = usePreloaderFinished();
+
   return (
     <div className={`relative ${bgColor} pt-36 pb-24 px-6 sm:px-8 overflow-hidden`}>
       {/* Background Image & Overlay */}
@@ -47,7 +50,7 @@ export default function PageHero({
             <div className="text-left max-w-xl">
               <motion.h1 
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={isPreloaderFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8 }}
                 className="text-4xl md:text-5xl font-cormorant font-light text-zinc-900 leading-tight mb-6"
               >
@@ -55,7 +58,7 @@ export default function PageHero({
               </motion.h1>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={isPreloaderFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-zinc-600 text-base md:text-lg leading-relaxed font-light"
               >
@@ -66,7 +69,7 @@ export default function PageHero({
             {/* Right Column: Image */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              animate={isPreloaderFinished ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
               transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="relative h-[300px] md:h-[400px] w-full rounded-2xl overflow-hidden shadow-lg border border-white/40"
             >
@@ -83,7 +86,7 @@ export default function PageHero({
           <div className="max-w-4xl mx-auto text-center">
             <motion.h1 
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={isPreloaderFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8 }}
               className={`text-4xl md:text-5xl font-cormorant font-light mb-6 tracking-wide ${
                 bgImage ? "text-white" : "text-zinc-900"
@@ -93,7 +96,7 @@ export default function PageHero({
             </motion.h1>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={isPreloaderFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className={`text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-light ${
                 bgImage ? "text-zinc-200" : "text-zinc-600"

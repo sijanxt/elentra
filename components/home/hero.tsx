@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { usePreloaderFinished } from "@/hooks/use-preloader";
 
 export default function Hero() {
+  const isPreloaderFinished = usePreloaderFinished();
+
   return (
     <div className="relative h-screen w-full overflow-hidden bg-zinc-900">
       {/* Full Background Image */}
@@ -27,7 +30,7 @@ export default function Hero() {
           {/* Column 1 - Large Heading (Right Aligned) */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={isPreloaderFinished ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-right"
           >
@@ -43,7 +46,7 @@ export default function Hero() {
           {/* Column 2 - Description */}
           <motion.div 
             initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={isPreloaderFinished ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-48 lg:mt-64"
           >
@@ -58,7 +61,7 @@ export default function Hero() {
         {/* Social Links - Absolute Bottom Right */}
         <motion.div 
           initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={isPreloaderFinished ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="absolute bottom-16 right-16 lg:right-32"
         >
@@ -103,7 +106,7 @@ export default function Hero() {
       {/* Scroll Down Indicator with Animation */}
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={isPreloaderFinished ? { opacity: 1 } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >

@@ -24,12 +24,23 @@ export default function Preloader() {
     // Minimum display time for dramatic effect
     const timer = setTimeout(() => {
       setIsLoading(false);
+      if (typeof window !== "undefined") {
+        (window as any).__preloaderFinished = true;
+        window.dispatchEvent(new Event("preloaderFinished"));
+      }
     }, 2800);
 
     return () => {
       clearInterval(interval);
       clearTimeout(timer);
     };
+  }, []);
+
+  // Initialize flag on mount
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      (window as any).__preloaderFinished = false;
+    }
   }, []);
 
   // Prevent scrolling while preloader is active
