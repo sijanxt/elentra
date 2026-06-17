@@ -62,7 +62,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="absolute bottom-16 right-16 lg:right-32"
         >
-          <div className="flex flex-col gap-3 text-[#C5D9D9] items-end">
+          <div className="flex flex-col gap-3 text-champagne items-end">
             <a 
               href="https://behance.net" 
               target="_blank"

@@ -10,6 +10,7 @@ export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
+  const shouldShowOpaque = isScrolled || pathname !== "/";
 
   useEffect(() => {
     let ticking = false;
@@ -45,18 +46,18 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? "bg-white/95 backdrop-blur-md shadow-sm" 
+      shouldShowOpaque 
+        ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-zinc-200/50" 
         : "bg-transparent"
     } ${
       isVisible ? "translate-y-0" : "-translate-y-full"
     }`}>
-      <div className="max-w-7xl mx-auto ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className={`text-3xl transition-colors duration-300 ${
-              isScrolled ? "text-secondary" : "text-white"
+              shouldShowOpaque ? "text-secondary" : "text-white"
             }`}>
               Elentra
             </Link>
@@ -75,7 +76,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={`transition-colors duration-300 text-base font-semibold ${
-                  isScrolled 
+                  shouldShowOpaque 
                     ? "text-secondary hover:text-cream-600" 
                     : "text-white hover:text-white/80"
                 }`}
@@ -90,7 +91,7 @@ export default function Navbar() {
             <Link
               href="/contact"
               className={`px-5 py-1.5 text-sm rounded-full font-semibold transition-all duration-300 border-2 ${
-                isScrolled
+                shouldShowOpaque
                   ? "border-secondary text-secondary hover:bg-secondary hover:text-white"
                   : "border-white text-white hover:bg-white hover:text-secondary"
               }`}
@@ -104,7 +105,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`focus:outline-none transition-colors duration-300 ${
-                isScrolled ? "text-secondary hover:text-cream-600" : "text-white hover:text-white/80"
+                shouldShowOpaque ? "text-secondary hover:text-cream-600" : "text-white hover:text-white/80"
               }`}
               aria-label="Toggle menu"
             >

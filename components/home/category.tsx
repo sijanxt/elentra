@@ -19,17 +19,17 @@ export default function Category() {
     {
       name: "Cleaning Appliances",
       description: "Smart cleaning technology for effortless care",
-      image: "/categories/kitchen.png", // Placeholder - add cleaning.png to public/categories
+      image: "/categories/cleaning.png",
     },
     {
       name: "Smart Home",
       description: "Connected devices for intelligent living",
-      image: "/categories/fridge.png", // Placeholder - add smart.png to public/categories
+      image: "/categories/smart.png",
     },
   ];
 
   return (
-    <section className="bg-white py-24">
+    <section className="bg-white py-24 border-b border-zinc-100">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -40,10 +40,10 @@ export default function Category() {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-4 mb-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-cream-400">
+            <h2 className="text-3xl sm:text-4xl font-bold text-cream-600">
               Elentra
             </h2>
-            <h2 className="text-3xl sm:text-4xl font-bold text-secondary">
+            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900">
               Product Range
             </h2>
           </div>
@@ -62,7 +62,7 @@ export default function Category() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.3 + index * 0.1 }}
-                className="bg-[#C5D9D9] p-8 rounded-3xl transition-all duration-300"
+                className="bg-champagne p-8 rounded-3xl transition-all duration-300"
               >
                 <div className="flex items-center gap-8">
                   {/* Product Image */}

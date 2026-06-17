@@ -14,7 +14,7 @@ interface PageHeroProps {
 export default function PageHero({ 
   title, 
   description, 
-  bgColor = "bg-[#C5D9D9]",
+  bgColor = "bg-champagne",
   bgImage,
   bgOpacity = 0.3
 }: PageHeroProps) {

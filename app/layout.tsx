@@ -3,6 +3,8 @@ import { Lora } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import LenisProvider from "@/components/providers/lenis-provider";
+import Preloader from "@/components/ui/preloader";
+import SoundToggle from "@/components/ui/sound-toggle";
 import "./globals.css";
 
 const lora = Lora({
@@ -27,7 +29,8 @@ export default function RootLayout({
       lang="en"
       className={`${lora.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 transition-colors duration-300 font-lora">
+      <body className="min-h-full flex flex-col bg-white text-zinc-900 transition-colors duration-300 font-lora">
+        <Preloader />
         <LenisProvider>
           <Navbar />
           <main className="flex-grow">
@@ -35,6 +38,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </LenisProvider>
+        <SoundToggle />
       </body>
     </html>
   );

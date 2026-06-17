@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fffafa; /* Primary color - Snow white */
-  --foreground: #0F172A; /* Secondary color - Dark slate */
+  --background: #ffffff;
+  --foreground: #121214;
+  --primary: #ffffff;
+  --secondary: #121214;
 }
 
 @theme inline {
@@ -12,8 +14,11 @@
   --font-mono: var(--font-lora);
   
   /* Primary & Secondary Colors */
-  --color-primary: #fffafa; /* Snow white */
-  --color-secondary: #0F172A; /* Dark slate */
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  
+  /* Champagne Accent Color */
+  --color-champagne: #E5DCD0;
   
   /* Luxury Champagne Cream Palette */
   --color-cream-50: #fefcf9;
@@ -28,14 +33,6 @@
   /* Font Family */
   --font-family-lora: var(--font-lora), serif;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0F172A; /* Secondary color for dark mode */
-    --foreground: #fffafa; /* Primary color for text in dark mode */
-  }
-}
-
 
 html {
   scroll-behavior: smooth;
@@ -194,7 +191,7 @@ button, a, input, textarea {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: #ffffff;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -218,10 +215,4 @@ button, a, input, textarea {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
-
-@media (prefers-color-scheme: dark) {
-  .glass {
-    background: rgba(20, 19, 18, 0.7);
-  }
 }

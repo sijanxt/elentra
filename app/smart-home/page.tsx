@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/ui/page-hero";
 import { Lightbulb, Thermometer, Shield, Mic, Lock, Smartphone } from "lucide-react";
+import { products } from "@/lib/products";
 
 export default function SmartHomePage() {
   const benefits = [
@@ -109,26 +110,7 @@ export default function SmartHomePage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Smart Hub Pro",
-                category: "Smart Home",
-                price: "Rs. 49,999",
-                image: "/products/fridge.png",
-              },
-              {
-                name: "Voice Assistant",
-                category: "Control Center",
-                price: "Rs. 24,999",
-                image: "/products/vaccumclenaer.png",
-              },
-              {
-                name: "Security System",
-                category: "Security",
-                price: "Rs. 74,999",
-                image: "/products/fridge.png",
-              },
-            ].map((product, index) => (
+            {products.filter((p) => p.category === "Smart Home").map((product, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -256,7 +238,7 @@ export default function SmartHomePage() {
       </section>
 
       {/* Integration Section */}
-      <section className="py-24 bg-[#C5D9D9]">
+      <section className="py-24 bg-champagne">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
