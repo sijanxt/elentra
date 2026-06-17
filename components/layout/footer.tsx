@@ -153,8 +153,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/smart-home" className="text-zinc-400 hover:text-white transition-colors duration-200">
-                  Smart Home
+                <Link href="/blog" className="text-zinc-400 hover:text-white transition-colors duration-200">
+                  Blog
                 </Link>
               </li>
               <li>

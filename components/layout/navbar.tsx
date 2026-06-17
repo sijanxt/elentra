@@ -106,7 +106,7 @@ export default function Navbar() {
               { name: "Home", href: "/" },
               { name: "About", href: "/about" },
               { name: "Shop", href: "/products" },
-              { name: "Smart Home", href: "/smart-home" },
+              { name: "Blog", href: "/blog" },
               { name: "Contact", href: "/contact" },
             ].map((link) => (
               <Link
@@ -178,7 +178,7 @@ export default function Navbar() {
               { name: "Home", href: "/" },
               { name: "Shop", href: "/products" },
               { name: "Categories", href: "/products" },
-              { name: "Smart Home", href: "/smart-home" },
+              { name: "Blog", href: "/blog" },
               { name: "Deals", href: "/products" },
               { name: "Contact", href: "/contact" },
             ].map((link) => (
