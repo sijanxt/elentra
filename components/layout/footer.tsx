@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
-    <footer className="w-full md:sticky md:bottom-0 md:z-0">
+    <footer className="w-full">
       {/* Bottom Section: Dark Footer */}
       <div className="bg-[#0f0f0f] text-zinc-400 min-h-screen flex flex-col justify-between pt-32 pb-8 border-t border-zinc-900 font-light text-sm font-montserrat">
         <div className="max-w-7xl mx-auto px-6 sm:px-8 w-full">
@@ -197,16 +197,16 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Giant ELENTRA text (FULL WIDTH - centered vertically) */}
-        <div className="w-full select-none pointer-events-none text-center my-auto py-10 border-y border-zinc-900/50 overflow-hidden">
-          <h1 className="text-[15vw] font-bold leading-none tracking-[0.08em] text-transparent [-webkit-text-stroke:1px_#222222] uppercase font-montserrat w-full block">
+        {/* Giant ELENTRA text (FULL WIDTH - positioned lower) */}
+        <div className="w-full select-none text-center py-10 overflow-hidden">
+          <h1 className="text-[15vw] font-bold leading-none tracking-[0.08em] text-[#141414] uppercase font-cormorant w-full block transition-all duration-700 ease-out hover:text-cream-500/25 cursor-default">
             Elentra
           </h1>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 sm:px-8 w-full">
+        <div className="max-w-7xl mx-auto px-6 border-t -mt-8 border-zinc-800 sm:px-8 w-full">
           {/* Bottom Copyright & WebX Nepal Logo */}
-          <div className="mt-8 pt-10 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs tracking-wider text-zinc-500 font-montserrat">
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs tracking-wider text-zinc-500 font-montserrat">
             <div>
               © 2026 ELENTRA APPLIANCES. ALL RIGHTS RESERVED.
             </div>
