@@ -13,7 +13,6 @@ export default function Home() {
       <Hero />
       <Features  />
       <NewItems />
-  
       <Video />
       <Reveal />
       <MovingSection />

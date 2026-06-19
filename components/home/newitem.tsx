@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import Title from "@/components/ui/title";
 
 interface SpotlightItem {
@@ -82,11 +81,7 @@ export default function NewItems() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {spotlightItems.map((item, index) => (
             <Link key={index} href={item.href} className="block group">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+              <div
                 className={`relative overflow-hidden aspect-[4/3] sm:aspect-[4/3.2] md:aspect-[4/3.3] lg:aspect-[4/3] rounded-[2rem] pt-12 pb-0 px-6 sm:px-8 flex flex-col items-center justify-between text-center shadow-xs transition-all duration-300 cursor-pointer ${item.bgClass}`}
               >
                 {/* Text Layout */}
@@ -115,7 +110,7 @@ export default function NewItems() {
                     unoptimized
                   />
                 </div>
-              </motion.div>
+              </div>
             </Link>
           ))}
         </div>

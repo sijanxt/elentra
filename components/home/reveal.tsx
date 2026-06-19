@@ -79,7 +79,8 @@ export default function RevealSection() {
       tl.to(imageRef.current, {
         scale: 1.12,
         duration: 0.25,
-        ease: "power2.inOut",
+        ease: "sine.out",
+        force3D: true,
       }, 0);
 
       // --- PHASE 2: Image 1 Slides out left, Image 2 Slides in from right (Progress 0.45 to 0.65) ---
@@ -101,7 +102,8 @@ export default function RevealSection() {
         {
           scale: 1.05,
           duration: 0.2,
-          ease: "power2.inOut",
+          ease: "sine.out",
+          force3D: true,
         },
         0.45
       );
@@ -125,7 +127,8 @@ export default function RevealSection() {
         {
           scale: 1.05,
           duration: 0.2,
-          ease: "power2.inOut",
+          ease: "sine.out",
+          force3D: true,
         },
         0.75
       );
@@ -150,7 +153,7 @@ export default function RevealSection() {
             src="/cta/fridge.jpg"
             alt="Luxury Appliance 1"
             fill
-            className="object-cover scale-100"
+            className="object-cover will-change-transform"
             unoptimized
           />
         </div>
@@ -165,7 +168,7 @@ export default function RevealSection() {
             src="/cta/new.png"
             alt="Luxury Appliance 2"
             fill
-            className="object-cover scale-100"
+            className="object-cover will-change-transform"
             unoptimized
           />
         </div>
@@ -180,7 +183,7 @@ export default function RevealSection() {
             src="/about/story.png"
             alt="Luxury Appliance 3"
             fill
-            className="object-cover scale-100"
+            className="object-cover will-change-transform"
             unoptimized
           />
         </div>

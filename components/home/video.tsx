@@ -231,8 +231,9 @@ export default function Video() {
         {/* Sticky Top Header */}
         <div ref={headerRef} className="absolute top-16 md:top-20 left-0 w-full z-20 px-4 pointer-events-none">
           <Title
-            creamText="Smart"
-            primaryText="Living"
+            creamText="Experience"
+            primaryText="Smart Living"
+            desc="Discover advanced luxury technologies engineered for the modern home"
             dark={true}
             animate={false}
           />
