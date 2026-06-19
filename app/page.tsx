@@ -12,9 +12,8 @@ export default function Home() {
     <main>
       <Hero />
       <Features  />
-  
       <Category />
-         <Video />
+      <Video />
       <Reveal />
       <MovingSection />
       <Products />

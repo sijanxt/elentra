@@ -57,7 +57,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Section: Dark Footer */}
-      <div className="bg-[#0f0f0f] text-zinc-400 py-20 px-6 sm:px-8 border-t border-zinc-900 font-light text-sm">
+      <div className="bg-[#0f0f0f] text-zinc-400 py-20 px-6 sm:px-8 border-t border-zinc-900 font-light text-sm font-montserrat">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
           
           {/* Column 1: Brand Pitch */}
@@ -69,7 +69,7 @@ export default function Footer() {
             className="lg:col-span-4 flex flex-col justify-between h-full min-h-[180px]"
           >
             <div>
-              <h2 className="text-white text-3xl md:text-4xl font-bold leading-tight tracking-tight mb-4 font-montserrat uppercase">
+              <h2 className="text-white text-3xl md:text-4xl font-light leading-tight tracking-[0.12em] mb-4 font-cormorant uppercase">
                 Innovative<br />
                 appliances for<br />
                 modern living®

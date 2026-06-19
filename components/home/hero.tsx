@@ -35,7 +35,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-right"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-white leading-tight">
               Smart
               <br />
               Living
@@ -51,7 +51,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-48 lg:mt-64"
           >
-            <p className="text-base sm:text-lg text-zinc-200 leading-relaxed">
+            <p className="text-base sm:text-lg text-zinc-200 leading-relaxed font-montserrat font-light">
               Experience the future of home living with our German-engineered smart appliances. 
               Designed for those who appreciate the perfect blend of innovation, efficiency, 
               and timeless elegance.
@@ -66,7 +66,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="absolute bottom-16 right-16 lg:right-32"
         >
-          <div className="flex flex-col gap-3 text-champagne items-end">
+          <div className="flex flex-col gap-3 text-champagne items-end font-montserrat tracking-wider">
             <a 
               href="https://behance.net" 
               target="_blank"

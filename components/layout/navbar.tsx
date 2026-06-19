@@ -113,7 +113,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`transition-colors duration-300 text-base font-semibold ${
+                className={`transition-colors duration-300 text-sm tracking-wider font-medium font-montserrat uppercase ${
                   shouldShowOpaque 
                     ? "text-secondary hover:text-cream-600" 
                     : "text-white hover:text-white/80"
@@ -187,7 +187,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-cream-600 hover:bg-zinc-50 transition-colors duration-200"
+                className="block px-3 py-2 rounded-md text-sm font-medium font-montserrat uppercase tracking-wider text-secondary hover:text-cream-600 hover:bg-zinc-50 transition-colors duration-200"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}

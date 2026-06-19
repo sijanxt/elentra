@@ -47,6 +47,10 @@ body {
   overflow-x: hidden;
 }
 
+p {
+  font-family: var(--font-montserrat), sans-serif;
+}
+
 /* Enhanced Animations */
 @keyframes fadeIn {
   from {
