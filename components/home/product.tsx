@@ -67,8 +67,8 @@ export default function Products() {
         />
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {products.slice(0, 8).map((product) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {products.slice(0, 6).map((product) => {
             const hasImageError = imageErrors[product.image];
             return (
               <Link
@@ -76,36 +76,48 @@ export default function Products() {
                 href={`/products/${product.id}`}
                 className="group cursor-pointer flex flex-col"
               >
-                {/* Image Area */}
-                <div className="aspect-[4/5] relative overflow-hidden bg-white border border-zinc-200/80 rounded-2xl shadow-xs group-hover:shadow-md group-hover:-translate-y-1 transition-all duration-300">
+                {/* Image Container with Luxury Gradient Backdrop */}
+                <div className="aspect-[4/5] relative overflow-hidden bg-gradient-to-b from-[#FAF8F5] to-[#f0f0ed] border border-zinc-200/40 rounded-[2rem] shadow-xs transition-all duration-500 ease-out flex items-center justify-center">
+                  
                   {(!hasImageError && product.image) ? (
                     <Image
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       onError={() => handleImageError(product.image)}
                     />
                   ) : (
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-20 h-20 bg-zinc-50 flex items-center justify-center text-zinc-400">
+                      <div className="w-16 h-16 bg-white/60 backdrop-blur-xs rounded-full flex items-center justify-center text-cream-600 shadow-xs">
                         {iconMap[categoryIconMap[product.category] || "utensils"]}
                       </div>
                     </div>
                   )}
                 </div>
-
-                {/* Details Area */}
-                <div className="pt-4 px-1">
-                  {/* Product Name */}
-                  <h3 className="text-sm sm:text-base font-bold text-zinc-900 group-hover:text-cream-600 transition-colors line-clamp-1">
-                    {product.name}
-                  </h3>
-                  {/* Price */}
-                  <p className="text-xs sm:text-sm font-semibold text-zinc-500 mt-1">
-                    {product.price}
-                  </p>
-                </div>
+ 
+                 {/* Details Area */}
+                 <div className="pt-5 px-2 flex flex-col gap-1">
+                   {/* Category Tag */}
+                   <span className="text-[10px] font-semibold text-cream-600 tracking-widest uppercase font-montserrat">
+                     {product.category}
+                   </span>
+ 
+                   {/* Product Name */}
+                   <h3 className="text-lg sm:text-xl font-medium tracking-tight text-zinc-900 group-hover:text-cream-600 transition-colors duration-300 font-cormorant line-clamp-1 leading-tight">
+                     {product.name}
+                   </h3>
+ 
+                   {/* Price Row */}
+                   <div className="flex items-center justify-between mt-1">
+                     <span className="text-xs sm:text-sm font-medium text-zinc-500 font-montserrat">
+                       {product.price}
+                     </span>
+                     <span className="text-[11px] font-medium text-zinc-400 font-montserrat tracking-wider uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                       View Details
+                     </span>
+                   </div>
+                 </div>
               </Link>
             );
           })}

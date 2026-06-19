@@ -66,7 +66,7 @@ const spotlightItems: SpotlightItem[] = [
 
 export default function NewItems() {
   return (
-    <section className="bg-white py-28 border-b border-zinc-100">
+    <section className="bg-white py-16 pb-30 border-b border-zinc-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}

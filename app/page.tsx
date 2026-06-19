@@ -15,7 +15,7 @@ export default function Home() {
       <NewItems />
       <Video />
       <Reveal />
-      <MovingSection />
+      {/* <MovingSection /> */}
       <Products />
       <CTA />
     </main>
