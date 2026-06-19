@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Title from "@/components/ui/title";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -229,14 +230,12 @@ export default function Video() {
 
         {/* Sticky Top Header */}
         <div ref={headerRef} className="absolute top-16 md:top-20 left-0 w-full z-20 px-4 pointer-events-none">
-          <div className="flex items-center justify-center gap-3 sm:gap-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-cream-400 drop-shadow-lg">
-              Smart
-            </h2>
-            <h2 className="text-3xl sm:text-4xl font-bold text-white drop-shadow-lg">
-              Living
-            </h2>
-          </div>
+          <Title
+            creamText="Smart"
+            primaryText="Living"
+            dark={true}
+            animate={false}
+          />
         </div>
 
       </div>

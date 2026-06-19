@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import Title from "@/components/ui/title";
 
 export default function Category() {
   const categories = [
@@ -33,21 +34,18 @@ export default function Category() {
       <div className="max-w-7xl mx-auto px-6 sm:px-8">
         
         {/* Header */}
+        <Title
+          creamText="Appliance"
+          primaryText="Collections"
+          className="mb-3"
+        />
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
           className="text-center mb-16"
         >
-          <div className="flex items-center justify-center gap-4 mb-3">
-            <h2 className="text-3xl sm:text-4xl font-bold text-cream-600">
-              Appliance
-            </h2>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900">
-              Collections
-            </h2>
-          </div>
           <p className="text-sm sm:text-base text-zinc-500 font-light max-w-xl mx-auto leading-relaxed">
             Discover innovative technology designed for your lifestyle
           </p>

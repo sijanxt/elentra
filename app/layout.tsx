@@ -3,7 +3,7 @@ import { Lora, Cormorant_Garamond, Montserrat } from "next/font/google";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import LenisProvider from "@/components/providers/lenis-provider";
-import Preloader from "@/components/ui/preloader";
+import Preloader from "@/components/providers/preloader";
 import "./globals.css";
 
 const lora = Lora({

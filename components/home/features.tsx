@@ -1,28 +1,18 @@
 "use client";
 
+import Title from "@/components/ui/title";
 import { motion } from "framer-motion";
 
 export default function Features() {
   return (
     <section className="bg-white py-24 border-b border-zinc-100">
       <div className="max-w-7xl mx-auto">
-        {/* Header with Image */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center mb-12"
-        >
-          <div className="flex items-center justify-center gap-4 mb-8">
-            <h2 className="text-3xl sm:text-4xl font-bold text-cream-600">
-              Elentra
-            </h2>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900">
-              Enhancing Technologies
-            </h2>
-          </div>
-        </motion.div>
+        {/* Header */}
+        <Title
+          creamText="Elentra"
+          primaryText="Enhancing Technologies"
+          className="mb-12"
+        />
 
         {/* Description */}
         <motion.div

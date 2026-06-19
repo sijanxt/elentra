@@ -191,13 +191,13 @@ export default function RevealSection() {
         >
           <h2
             ref={upperTextRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-secondary leading-tight font-cormorant italic"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl capitalize font-medium text-secondary leading-tight font-cormorant "
           >
             Meet the smartest home appliances
           </h2>
           <h2
             ref={lowerTextRef}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-secondary leading-tight font-cormorant italic"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl capitalize font-medium text-secondary leading-tight font-cormorant"
           >
             known to modern living
           </h2>
