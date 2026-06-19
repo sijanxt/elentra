@@ -218,3 +218,9 @@ button, a, input, textarea {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
+
+/* Cinematic vignette gradient */
+.bg-radial-vignette {
+  background: radial-gradient(circle, transparent 40%, rgba(9, 9, 11, 0.7) 100%);
+}
+

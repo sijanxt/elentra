@@ -9,7 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function RevealSection() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
+  const upperTextRef = useRef<HTMLHeadingElement>(null);
+  const lowerTextRef = useRef<HTMLHeadingElement>(null);
   const imageWrapperRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   
@@ -24,7 +25,8 @@ export default function RevealSection() {
   useEffect(() => {
     if (
       !containerRef.current ||
-      !textRef.current ||
+      !upperTextRef.current ||
+      !lowerTextRef.current ||
       !imageWrapperRef.current ||
       !imageRef.current ||
       !imageWrapper2Ref.current ||
@@ -40,22 +42,29 @@ export default function RevealSection() {
       gsap.set(imageWrapper2Ref.current, { xPercent: 100 });
       gsap.set(imageWrapper3Ref.current, { xPercent: 100 });
 
-      // Complete scroll timeline spanning 320vh for scroll space
+      // Complete scroll timeline spanning 220vh for scroll space
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
           end: "bottom bottom",
-          scrub: 1,
+          scrub: 1.8,
         },
       });
 
-      // --- PHASE 1: Text Fades, Background Image 1 Expands (Progress 0 to 0.3) ---
-      tl.to(textRef.current, {
+      // --- PHASE 1: Text Fades, Background Image 1 Expands (Progress 0 to 0.25) ---
+      tl.to(upperTextRef.current, {
         opacity: 0,
-        y: -60,
-        duration: 0.3,
-        ease: "power1.out",
+        y: -120,
+        duration: 0.25,
+        ease: "power2.inOut",
+      }, 0);
+
+      tl.to(lowerTextRef.current, {
+        opacity: 0,
+        y: 120,
+        duration: 0.25,
+        ease: "power2.inOut",
       }, 0);
 
       tl.to(imageWrapperRef.current, {
@@ -63,60 +72,62 @@ export default function RevealSection() {
         width: "100vw",
         height: "100vh",
         borderRadius: "0px",
-        duration: 0.3,
+        duration: 0.25,
         ease: "power2.inOut",
       }, 0);
 
       tl.to(imageRef.current, {
         scale: 1.12,
-        duration: 0.3,
+        duration: 0.25,
         ease: "power2.inOut",
       }, 0);
 
-      // --- PHASE 2: Image 1 Slides out left, Image 2 Slides in from right (Progress 0.3 to 0.65) ---
+      // --- PHASE 2: Image 1 Slides out left, Image 2 Slides in from right (Progress 0.45 to 0.65) ---
+      // (Image 1 holds still between 0.25 and 0.45)
       tl.to(imageWrapperRef.current, {
         xPercent: -150,
-        duration: 0.35,
+        duration: 0.2,
         ease: "power2.inOut",
-      }, 0.3);
+      }, 0.45);
 
       tl.to(imageWrapper2Ref.current, {
         xPercent: 0, // slides to center
-        duration: 0.35,
+        duration: 0.2,
         ease: "power2.inOut",
-      }, 0.3);
+      }, 0.45);
 
       tl.fromTo(image2Ref.current,
         { scale: 1.2 },
         {
           scale: 1.05,
-          duration: 0.35,
+          duration: 0.2,
           ease: "power2.inOut",
         },
-        0.3
+        0.45
       );
 
-      // --- PHASE 3: Image 2 Slides out left, Image 3 Slides in from right (Progress 0.65 to 1.0) ---
+      // --- PHASE 3: Image 2 Slides out left, Image 3 Slides in from right (Progress 0.75 to 0.95) ---
+      // (Image 2 holds still between 0.65 and 0.75)
       tl.to(imageWrapper2Ref.current, {
         xPercent: -100,
-        duration: 0.35,
+        duration: 0.2,
         ease: "power2.inOut",
-      }, 0.65);
+      }, 0.75);
 
       tl.to(imageWrapper3Ref.current, {
         xPercent: 0, // slides to center
-        duration: 0.35,
+        duration: 0.2,
         ease: "power2.inOut",
-      }, 0.65);
+      }, 0.75);
 
       tl.fromTo(image3Ref.current,
         { scale: 1.2 },
         {
           scale: 1.05,
-          duration: 0.35,
+          duration: 0.2,
           ease: "power2.inOut",
         },
-        0.65
+        0.75
       );
     });
 
@@ -124,7 +135,7 @@ export default function RevealSection() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full" style={{ height: "320vh" }}>
+    <div ref={containerRef} className="relative w-full" style={{ height: "220vh" }}>
       {/* Pinned Viewport */}
       <div className="sticky top-0 h-screen w-full bg-zinc-50 overflow-hidden">
         
@@ -174,13 +185,21 @@ export default function RevealSection() {
           />
         </div>
 
-        {/* Centered Text */}
+        {/* Centered Text (Splitting two lines so they separate cinematic style) */}
         <div
-          ref={textRef}
-          className="absolute inset-0 flex items-center justify-center max-w-4xl mx-auto px-4 text-center z-20 pointer-events-none"
+          className="absolute inset-0 flex flex-col items-center justify-center max-w-5xl mx-auto px-4 text-center z-20 pointer-events-none gap-1 sm:gap-2"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium text-secondary leading-tight font-cormorant italic">
-            Meet the smartest home appliances known to modern living
+          <h2
+            ref={upperTextRef}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-secondary leading-tight font-cormorant italic"
+          >
+            Meet the smartest home appliances
+          </h2>
+          <h2
+            ref={lowerTextRef}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-secondary leading-tight font-cormorant italic"
+          >
+            known to modern living
           </h2>
         </div>
 
