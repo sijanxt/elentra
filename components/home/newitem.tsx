@@ -18,7 +18,7 @@ const spotlightItems: SpotlightItem[] = [
   {
     title: "AeroFresh 4-Door",
     desc: "Triple-zone climate preservation with split-zone humidity matrix.",
-    image: "/products/fridge.png",
+    image: "/items/fridge.png",
     bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
     dark: false,
     href: "/products/3"
@@ -26,15 +26,15 @@ const spotlightItems: SpotlightItem[] = [
   {
     title: "Quantum Wave Oven",
     desc: "AI-assisted convection baking with integrated camera monitoring.",
-    image: "/products/smart_oven.png",
-    bgClass: "bg-gradient-to-b from-[#909581] to-[#7a7f6a]",
-    dark: true,
+    image: "/items/oven.png",
+    bgClass: "bg-gradient-to-b from-[#F4F6F1] to-[#DFE3D5]",
+    dark: false,
     href: "/products/2"
   },
   {
     title: "AeroSteam Induction",
     desc: "Flush-mount cooktop with silent automatic downdraft vapor extraction.",
-    image: "/products/cooktop.png",
+    image: "/items/alectricjug.png",
     bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
     dark: false,
     href: "/products/1"
@@ -42,15 +42,15 @@ const spotlightItems: SpotlightItem[] = [
   {
     title: "AeroSilent Climate",
     desc: "German-engineered variable speed inverter with silent air HEPA filtration.",
-    image: "/products/split_ac.png",
-    bgClass: "bg-gradient-to-b from-[#e2bbb6] to-[#d8a7a1]",
+    image: "/items/airventilation.png",
+    bgClass: "bg-gradient-to-b from-[#FAF5F3] to-[#ECE0DC]",
     dark: false,
     href: "/products/5"
   },
   {
     title: "RoboClean X10 Station",
     desc: "Fully automated LiDAR dry and wet sweep robotics center.",
-    image: "/products/vaccumclenaer.png",
+    image: "/items/vacuum.png",
     bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
     dark: false,
     href: "/products/9"
@@ -58,7 +58,7 @@ const spotlightItems: SpotlightItem[] = [
   {
     title: "Nexus Hub Pro",
     desc: "Matter-compatible central utility control screen for all home modules.",
-    image: "/products/smart_hub.png",
+    image: "/items/sofaa.png",
     bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#E9E4DB]",
     dark: false,
     href: "/products/11"
@@ -104,7 +104,7 @@ export default function NewItems() {
                 </div>
 
                 {/* Centered Image (Fades & Scales on Hover) */}
-                <div className="relative w-full h-[68%] mt-auto flex items-center justify-center overflow-hidden">
+                <div className="relative w-full h-[80%] mt-auto flex items-center justify-center overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.title}
