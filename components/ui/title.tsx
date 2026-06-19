@@ -34,10 +34,10 @@ export default function Title({
 
   const headingElements = (
     <>
-      <h2 className={`text-3xl sm:text-4xl font-bold ${creamColor} ${shadowClass}`}>
+      <h2 className={`text-3xl sm:text-4xl font-medium ${creamColor} ${shadowClass}`}>
         {creamText}
       </h2>
-      <h2 className={`text-3xl sm:text-4xl font-bold ${primaryColor} ${shadowClass}`}>
+      <h2 className={`text-3xl sm:text-4xl font-medium ${primaryColor} ${shadowClass}`}>
         {primaryText}
       </h2>
     </>

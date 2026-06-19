@@ -109,19 +109,26 @@ export default function Navbar() {
               { name: "Blog", href: "/blog" },
               { name: "Support", href: "/support" },
               { name: "Contact", href: "/contact" },
-            ].map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`transition-colors duration-300 text-sm tracking-wider font-medium font-montserrat uppercase ${
-                  shouldShowOpaque 
-                    ? "text-secondary hover:text-cream-600" 
-                    : "text-white hover:text-white/80"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
+            ].map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`transition-colors duration-300 text-sm tracking-wider font-medium font-montserrat uppercase ${
+                    isActive
+                      ? shouldShowOpaque
+                        ? "text-cream-600 font-semibold"
+                        : "text-white font-semibold border-b-2 border-white pb-0.5"
+                      : shouldShowOpaque
+                      ? "text-secondary hover:text-cream-600"
+                      : "text-white/70 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right Section: Search, Sound Toggle & Mobile Menu button */}
@@ -177,22 +184,28 @@ export default function Navbar() {
           <div className="px-2 pt-2 pb-3 space-y-1">
             {[
               { name: "Home", href: "/" },
+              { name: "About", href: "/about" },
               { name: "Shop", href: "/products" },
-              { name: "Categories", href: "/products" },
               { name: "Blog", href: "/blog" },
-              { name: "Deals", href: "/products" },
               { name: "Support", href: "/support" },
               { name: "Contact", href: "/contact" },
-            ].map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="block px-3 py-2 rounded-md text-sm font-medium font-montserrat uppercase tracking-wider text-secondary hover:text-cream-600 hover:bg-zinc-50 transition-colors duration-200"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+            ].map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  className={`block px-3 py-2 rounded-md text-sm font-medium font-montserrat uppercase tracking-wider transition-colors duration-200 ${
+                    isActive
+                      ? "text-cream-600 bg-cream-50/30 font-semibold"
+                      : "text-secondary hover:text-cream-600 hover:bg-zinc-50"
+                  }`}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}

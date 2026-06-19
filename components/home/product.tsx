@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { products, Product } from "@/lib/products";
+import Title from "../ui/title";
 
 const iconMap: Record<string, React.ReactNode> = {
   utensils: (
@@ -59,14 +60,11 @@ export default function Products() {
     <section id="products" className="bg-zinc-50 py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <div className="flex items-center justify-center gap-4 mb-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-cream-600">
-              Elentra
-            </h2>
-            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-900">
-              Featured Products
-            </h2>
-          </div>
+         <Title
+            creamText="Elentra"
+            primaryText="Featured Products"
+            className="mb-3"
+          />
           <p className="text-lg text-zinc-500">
             Explore our premium collection of luxury home appliances
           </p>

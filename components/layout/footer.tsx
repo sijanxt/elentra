@@ -69,7 +69,7 @@ export default function Footer() {
             className="lg:col-span-4 flex flex-col justify-between h-full min-h-[180px]"
           >
             <div>
-              <h2 className="text-white text-3xl md:text-4xl font-light leading-tight tracking-[0.12em] mb-4 font-cormorant uppercase">
+              <h2 className="text-white text-3xl md:text-4xl font-light leading-tight tracking-[0.12em] mb-4 font-cormorant capitalize">
                 Innovative<br />
                 appliances for<br />
                 modern living®
