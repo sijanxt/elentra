@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import PageHero from "@/components/ui/page-hero";
+import Button from "@/components/ui/button";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -109,17 +110,14 @@ export default function Contact() {
               />
             </div>
 
-            {/* Submit Button */}
             <div className="flex justify-end pt-8">
-              <button
+              <Button
                 type="submit"
-                className="group px-8 py-3 text-sm bg-transparent border border-[#63544a] hover:bg-[#63544a] text-[#63544a] hover:text-white font-medium rounded-full transition-all duration-300 flex items-center gap-2 cursor-pointer font-montserrat tracking-wider"
+                variant="premium"
+                size="md"
               >
                 Submit Inquiry
-                <svg className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </button>
+              </Button>
             </div>
           </form>
         </div>

@@ -1,0 +1,126 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import Title from "@/components/ui/title";
+
+interface SpotlightItem {
+  title: string;
+  desc: string;
+  image: string;
+  bgClass: string;
+  dark: boolean;
+  href: string;
+}
+
+const spotlightItems: SpotlightItem[] = [
+  {
+    title: "AeroFresh 4-Door",
+    desc: "Triple-zone climate preservation with split-zone humidity matrix.",
+    image: "/products/fridge.png",
+    bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
+    dark: false,
+    href: "/products/3"
+  },
+  {
+    title: "Quantum Wave Oven",
+    desc: "AI-assisted convection baking with integrated camera monitoring.",
+    image: "/products/smart_oven.png",
+    bgClass: "bg-gradient-to-b from-[#909581] to-[#7a7f6a]",
+    dark: true,
+    href: "/products/2"
+  },
+  {
+    title: "AeroSteam Induction",
+    desc: "Flush-mount cooktop with silent automatic downdraft vapor extraction.",
+    image: "/products/cooktop.png",
+    bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
+    dark: false,
+    href: "/products/1"
+  },
+  {
+    title: "AeroSilent Climate",
+    desc: "German-engineered variable speed inverter with silent air HEPA filtration.",
+    image: "/products/split_ac.png",
+    bgClass: "bg-gradient-to-b from-[#e2bbb6] to-[#d8a7a1]",
+    dark: false,
+    href: "/products/5"
+  },
+  {
+    title: "RoboClean X10 Station",
+    desc: "Fully automated LiDAR dry and wet sweep robotics center.",
+    image: "/products/vaccumclenaer.png",
+    bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
+    dark: false,
+    href: "/products/9"
+  },
+  {
+    title: "Nexus Hub Pro",
+    desc: "Matter-compatible central utility control screen for all home modules.",
+    image: "/products/smart_hub.png",
+    bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#E9E4DB]",
+    dark: false,
+    href: "/products/11"
+  }
+];
+
+export default function NewItems() {
+  return (
+    <section className="bg-white py-28 border-b border-zinc-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Section Header */}
+        <Title
+          creamText="Elentra"
+          primaryText="Innovation Spotlight"
+          desc="Explore our newest releases designed to elevate modern living experiences"
+          className="mb-16"
+        />
+
+        {/* Promo Grid (2 Columns on MD+) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+          {spotlightItems.map((item, index) => (
+            <Link key={index} href={item.href} className="block group">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                className={`relative overflow-hidden aspect-[4/3] sm:aspect-[4/3.2] md:aspect-[4/3.3] lg:aspect-[4/3] rounded-[2rem] pt-12 pb-0 px-6 sm:px-8 flex flex-col items-center justify-between text-center shadow-xs transition-all duration-300 cursor-pointer ${item.bgClass}`}
+              >
+                {/* Text Layout */}
+                <div className="flex flex-col items-center max-w-md z-10">
+                  <h3 className={`text-2xl sm:text-3xl font-medium tracking-tight font-cormorant mb-2 ${
+                    item.dark ? "text-white" : "text-zinc-900"
+                  }`}>
+                    {item.title}
+                  </h3>
+                  <p className={`text-xs sm:text-sm font-light leading-relaxed max-w-sm font-montserrat ${
+                    item.dark ? "text-zinc-400" : "text-zinc-500"
+                  }`}>
+                    {item.desc}
+                  </p>
+                </div>
+
+                {/* Centered Image (Fades & Scales on Hover) */}
+                <div className="relative w-full h-[68%] mt-auto flex items-center justify-center overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={index < 2}
+                    unoptimized
+                  />
+                </div>
+              </motion.div>
+            </Link>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}

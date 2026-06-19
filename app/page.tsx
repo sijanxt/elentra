@@ -4,6 +4,7 @@ import Category from "@/components/home/category";
 import Reveal from "@/components/home/reveal";
 import MovingSection from "@/components/home/moveing";
 import Products from "@/components/home/product";
+import NewItems from "@/components/home/newitem";
 import CTA from "@/components/home/cta";
 import Video  from "@/components/home/video"
 
@@ -12,6 +13,7 @@ export default function Home() {
     <main>
       <Hero />
       <Features  />
+      <NewItems />
       <Category />
       <Video />
       <Reveal />

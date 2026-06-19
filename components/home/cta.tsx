@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Button from "@/components/ui/button";
 
 export default function CTA() {
   return (
@@ -13,7 +13,7 @@ export default function CTA() {
           src="/cta/new.png"
           alt="CTA Background"
           fill
-          className="object-cover  opacity-80"
+          className="object-cover opacity-80"
         />
       </div>
       
@@ -46,19 +46,22 @@ export default function CTA() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Link
+          <Button
             href="/contact"
-            className="w-full sm:w-auto px-6 py-2.5 text-base rounded-full font-semibold transition-all duration-300 border-2 border-white text-white hover:bg-white hover:text-black"
+            variant="primary"
+            className="w-full sm:w-auto"
           >
             Schedule Consultation
-          </Link>
+          </Button>
           
-          <Link
+          <Button
             href="#products"
-            className="w-full sm:w-auto px-6 py-2.5 text-base rounded-full font-semibold transition-all duration-300 border-2 border-white text-white hover:bg-white hover:text-black"
+            variant="premium"
+            dark={true}
+            className="w-full sm:w-auto"
           >
             Browse Products
-          </Link>
+          </Button>
         </motion.div>
       </div>
     </section>

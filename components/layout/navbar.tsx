@@ -136,7 +136,7 @@ export default function Navbar() {
             {/* Search Trigger Icon */}
             <button
               onClick={() => setSearchOpen(true)}
-              className={`p-2 rounded-full hover:bg-zinc-100/10 transition-colors duration-300 ${
+              className={`p-2 rounded-full hover:bg-zinc-100/10 transition-colors duration-300 cursor-pointer ${
                 shouldShowOpaque ? "text-secondary hover:text-cream-600 hover:bg-zinc-100" : "text-white hover:text-white/80"
               }`}
               aria-label="Search products"
@@ -241,7 +241,7 @@ export default function Navbar() {
                 {searchQuery && (
                   <button 
                     onClick={() => setSearchQuery("")} 
-                    className="text-zinc-400 hover:text-zinc-600 p-0.5 rounded-full hover:bg-zinc-200 transition-colors"
+                    className="text-zinc-400 hover:text-zinc-600 p-0.5 rounded-full hover:bg-zinc-200 transition-colors cursor-pointer"
                   >
                     <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -256,7 +256,7 @@ export default function Navbar() {
                   setSearchOpen(false);
                   setSearchQuery("");
                 }}
-                className="p-2 text-zinc-400 hover:text-zinc-950 rounded-full hover:bg-zinc-100 transition-all duration-300 flex items-center justify-center shrink-0 ml-4"
+                className="p-2 text-zinc-400 hover:text-zinc-950 rounded-full hover:bg-zinc-100 transition-all duration-300 flex items-center justify-center shrink-0 ml-4 cursor-pointer"
                 aria-label="Close search"
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -367,7 +367,7 @@ export default function Navbar() {
                           <button
                             key={cat}
                             onClick={() => setSearchQuery(cat)}
-                            className="px-4 py-2.5 bg-white border border-zinc-200/60 text-zinc-700 hover:border-cream-600 hover:text-cream-600 hover:bg-cream-50/20 text-xs font-semibold rounded-full shadow-xs transition-all duration-300"
+                            className="px-4 py-2.5 bg-white border border-zinc-200/60 text-zinc-700 hover:border-cream-600 hover:text-cream-600 hover:bg-cream-50/20 text-xs font-semibold rounded-full shadow-xs transition-all duration-300 cursor-pointer"
                           >
                             {cat}
                           </button>

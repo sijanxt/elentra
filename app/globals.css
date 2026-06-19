@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f4efe6;
   --foreground: #121214;
   --primary: #ffffff;
   --secondary: #121214;
@@ -197,7 +197,7 @@ button, a, input, textarea {
 }
 
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {

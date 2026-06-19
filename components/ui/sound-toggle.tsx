@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import Button from "./button";
 
 interface SoundToggleProps {
   isOpaque?: boolean;
@@ -50,10 +51,13 @@ export default function SoundToggle({ isOpaque = true }: SoundToggleProps) {
   ];
 
   return (
-    <motion.button
+    <Button
       id="sound-toggle"
       onClick={toggleSound}
-      className="relative flex items-center gap-2.5 group cursor-pointer focus:outline-none py-1.5 px-3 rounded-full transition-all duration-300"
+      variant="premium"
+      size="sm"
+      dark={!isOpaque}
+      className="!py-1.5 !px-3"
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 1.5 }}
@@ -106,15 +110,6 @@ export default function SoundToggle({ isOpaque = true }: SoundToggleProps) {
           />
         ))}
       </div>
-
-      {/* Subtle ring indicator */}
-      <motion.div
-        className={`absolute inset-0 rounded-full border transition-colors duration-300 ${
-          isOpaque 
-            ? "border-zinc-200 group-hover:border-cream-500" 
-            : "border-white/20 group-hover:border-white/55"
-        }`}
-      />
-    </motion.button>
+    </Button>
   );
 }

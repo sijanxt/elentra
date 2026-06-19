@@ -59,16 +59,12 @@ export default function Products() {
   return (
     <section id="products" className="bg-zinc-50 py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-         <Title
-            creamText="Elentra"
-            primaryText="Featured Products"
-            className="mb-3"
-          />
-          <p className="text-lg text-zinc-500">
-            Explore our premium collection of luxury home appliances
-          </p>
-        </div>
+        <Title
+          creamText="Elentra"
+          primaryText="Featured Products"
+          desc="Explore our premium collection of luxury home appliances"
+          className="mb-16"
+        />
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

@@ -37,19 +37,9 @@ export default function Category() {
         <Title
           creamText="Appliance"
           primaryText="Collections"
-          className="mb-3"
+          desc="Discover innovative technology designed for your lifestyle"
+          className="mb-16"
         />
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm sm:text-base text-zinc-500 font-light max-w-xl mx-auto leading-relaxed">
-            Discover innovative technology designed for your lifestyle
-          </p>
-        </motion.div>
 
         {/* Categories Grid (4 Columns) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
