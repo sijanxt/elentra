@@ -19,7 +19,7 @@ const spotlightItems: SpotlightItem[] = [
     title: "AeroFresh 4-Door",
     desc: "Triple-zone climate preservation with split-zone humidity matrix.",
     image: "/items/fridge.png",
-    bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
+    bgClass: "bg-gradient-to-b from-[#ececf2] to-[#FAF8F5]",
     dark: false,
     href: "/products/3"
   },
@@ -27,7 +27,7 @@ const spotlightItems: SpotlightItem[] = [
     title: "Quantum Wave Oven",
     desc: "AI-assisted convection baking with integrated camera monitoring.",
     image: "/items/oven.png",
-    bgClass: "bg-gradient-to-b from-[#F4F6F1] to-[#DFE3D5]",
+    bgClass: "bg-gradient-to-b from-[#DFE3D5] to-[#F4F6F1]",
     dark: false,
     href: "/products/2"
   },
@@ -51,7 +51,7 @@ const spotlightItems: SpotlightItem[] = [
     title: "RoboClean X10 Station",
     desc: "Fully automated LiDAR dry and wet sweep robotics center.",
     image: "/items/vacuum.png",
-    bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
+    bgClass: "bg-gradient-to-b from-[#ececf2] to-[#ececf2]",
     dark: false,
     href: "/products/9"
   },
@@ -59,7 +59,7 @@ const spotlightItems: SpotlightItem[] = [
     title: "Nexus Hub Pro",
     desc: "Matter-compatible central utility control screen for all home modules.",
     image: "/items/sofaa.png",
-    bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#E9E4DB]",
+    bgClass: "bg-gradient-to-b from-[#E9E4DB] to-[#E9E4DB]",
     dark: false,
     href: "/products/11"
   }
