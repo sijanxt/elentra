@@ -93,10 +93,10 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-14">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className={`text-3xl font-cormorant font-semibold transition-colors duration-300 ${
+            <Link href="/" className={`text-2xl font-cormorant font-semibold transition-colors duration-300 ${
               shouldShowOpaque ? "text-secondary" : "text-white"
             }`}>
-              Elentra
+              ELENTRA
             </Link>
           </div>
 
