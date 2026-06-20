@@ -1,5 +1,6 @@
 export interface Product {
   id: string;
+  slug: string;
   name: string;
   category: string;
   price: string;
@@ -22,7 +23,7 @@ export interface CategoryData {
   productIds: string[];
 }
 
-export const products: Product[] = [
+const rawProducts = [
   {
     id: "1",
     name: "AeroSteam Induction Cooktop",
@@ -348,6 +349,14 @@ export const products: Product[] = [
     image: "/products/air_purifier.png"
   }
 ];
+
+export const products: Product[] = rawProducts.map((p) => ({
+  ...p,
+  slug: p.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, ""),
+})) as Product[];
 
 export const categories: CategoryData[] = [
   {

@@ -290,7 +290,7 @@ export default function Navbar() {
                           return (
                             <Link
                               key={product.id}
-                              href={`/products/${product.id}`}
+                              href={`/products/${product.slug}`}
                               onClick={() => {
                                 setSearchOpen(false);
                                 setSearchQuery("");
@@ -384,7 +384,7 @@ export default function Navbar() {
                         {products.slice(0, 3).map((p) => (
                           <Link
                             key={p.id}
-                            href={`/products/${p.id}`}
+                            href={`/products/${p.slug}`}
                             onClick={() => {
                               setSearchOpen(false);
                               setSearchQuery("");

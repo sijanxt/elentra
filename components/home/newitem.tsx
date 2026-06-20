@@ -20,7 +20,7 @@ const spotlightItems: SpotlightItem[] = [
     image: "/items/fridge.png",
     bgClass: "bg-gradient-to-b from-[#ececf2] to-[#FAF8F5]",
     dark: false,
-    href: "/products/3"
+    href: "/products/aerofresh-4-door-refrigerator"
   },
   {
     title: "Quantum Wave Oven",
@@ -28,7 +28,7 @@ const spotlightItems: SpotlightItem[] = [
     image: "/items/oven.png",
     bgClass: "bg-gradient-to-b from-[#DFE3D5] to-[#F4F6F1]",
     dark: false,
-    href: "/products/2"
+    href: "/products/quantum-wave-smart-oven"
   },
   {
     title: "AeroSteam Induction",
@@ -36,7 +36,7 @@ const spotlightItems: SpotlightItem[] = [
     image: "/items/alectricjug.png",
     bgClass: "bg-gradient-to-b from-[#FAF8F5] to-[#ececf2]",
     dark: false,
-    href: "/products/1"
+    href: "/products/aerosteam-induction-cooktop"
   },
   {
     title: "AeroSilent Climate",
@@ -44,7 +44,7 @@ const spotlightItems: SpotlightItem[] = [
     image: "/items/airventilation.png",
     bgClass: "bg-gradient-to-b from-[#FAF5F3] to-[#ECE0DC]",
     dark: false,
-    href: "/products/5"
+    href: "/products/aerosilent-split-system"
   },
   {
     title: "RoboClean X10 Station",
@@ -52,7 +52,7 @@ const spotlightItems: SpotlightItem[] = [
     image: "/items/vacuum.png",
     bgClass: "bg-gradient-to-b from-[#ececf2] to-[#ececf2]",
     dark: false,
-    href: "/products/9"
+    href: "/products/roboclean-x10-station"
   },
   {
     title: "Nexus Hub Pro",
@@ -60,7 +60,7 @@ const spotlightItems: SpotlightItem[] = [
     image: "/items/sofaa.png",
     bgClass: "bg-gradient-to-b from-[#E9E4DB] to-[#E9E4DB]",
     dark: false,
-    href: "/products/11"
+    href: "/products/nexus-hub-pro-center"
   }
 ];
 

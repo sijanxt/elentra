@@ -14,7 +14,7 @@ export default function Home() {
       <Features  />
       <NewItems />
       <Video />
-      <Reveal />
+      {/* <Reveal /> */}
       {/* <MovingSection /> */}
       <Products />
       <CTA />

@@ -1,8 +1,10 @@
 "use client";
 
+import SupportHero from "./components/hero";
+
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import PageHero from "@/components/ui/page-hero";
+
 import Title from "@/components/ui/title";
 import { products } from "@/lib/products";
 import { 
@@ -146,12 +148,7 @@ export default function SupportPage() {
   return (
     <div className="min-h-screen bg-white text-secondary selection:bg-cream-200">
       {/* Hero Header */}
-      <PageHero
-        title="Support & Care Center"
-        description="Providing professional engineering assistance, custom setup guidance, and instant digital warranty checks to safeguard your comfort."
-        bgImage="/hero/about_hero.png"
-        bgOpacity={0.3}
-      />
+      <SupportHero />
 
       {/* Navigation Shortcuts Grid */}
       <section className="py-24 bg-white">

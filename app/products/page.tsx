@@ -79,7 +79,7 @@ export default function ProductsPage() {
           {filteredProducts.map((product) => (
             <Link
               key={product.id}
-              href={`/products/${product.id}`}
+              href={`/products/${product.slug}`}
               className="group flex flex-col"
             >
               {/* Image Container with Luxury Gradient Backdrop */}

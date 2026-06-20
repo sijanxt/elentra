@@ -73,7 +73,7 @@ export default function Products() {
             return (
               <Link
                 key={product.id}
-                href={`/products/${product.id}`}
+                href={`/products/${product.slug}`}
                 className="group cursor-pointer flex flex-col"
               >
                 {/* Image Container with Luxury Gradient Backdrop */}
